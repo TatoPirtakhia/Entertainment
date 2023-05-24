@@ -11,7 +11,7 @@ function ForgotPassword() {
   const onSubmit: SubmitHandler<forgotPassword> = async (data) => {
     await SendInstructions({
       email: data.email,
-      redirectLink: "entertainment-i5nh23ki5-tatopirtakhia.vercel.app/RecoveryPassword",
+      redirectLink: "https://entertainment-omega.vercel.app/RecoveryPassword",
     });
   };
   const {

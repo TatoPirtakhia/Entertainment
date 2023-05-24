@@ -30,7 +30,7 @@ function Registration() {
       formData.append("name", data.name);
       formData.append(
         "redirectLink",
-        "entertainment-i5nh23ki5-tatopirtakhia.vercel.app/VerifyAccount"
+        "https://entertainment-omega.vercel.app/VerifyAccount"
       );
       formData.append("email", data.email);
       formData.append("password", data.password);
