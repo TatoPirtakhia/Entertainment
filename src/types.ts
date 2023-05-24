@@ -9,3 +9,12 @@ export type login = {
     nameOrEmail: string;
     password:string
 };
+
+export type forgotPassword = {
+    email: string;
+};
+
+export type Recovery = {
+    password: string;
+    repeatPassword:string
+};

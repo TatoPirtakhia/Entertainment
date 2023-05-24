@@ -5,13 +5,11 @@ const VerifyEmail = async (data: any) => {
   try {
     const response = await axios.post(
       "https://movies-doxx.onrender.com/api/verify",
-      { hash:data }
+      { hash: data }
     );
     return response.data;
   } catch (error) {
-    
-    throw error
-
+    throw error;
   }
 };
 

@@ -4,12 +4,12 @@ import { Inputs } from "../../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ValidationSchema from "./Validation";
 import { useNavigate } from "react-router-dom";
-import sendRegistrtationRequest from "./RequestForRegistration";
 import { useRef, useState } from "react";
+import { sendRegistrationRequest } from "./index";
 function Registration() {
   const [selectedImage, setSelectedImage] = useState<boolean>(true);
   const [errorField, setErrorField] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const imageRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
@@ -36,10 +36,11 @@ function Registration() {
       formData.append("password", data.password);
       formData.append("repeatPassword", data.repeatPassword);
       try {
-        await sendRegistrtationRequest(formData);
+        await sendRegistrationRequest(formData);
+        navigate("/succesfullyCreated");
       } catch (error) {
-         setErrorMessage((error as { message: string }).message);
-         setErrorField((error as { field:string }).field)
+        setErrorMessage((error as { message: string }).message);
+        setErrorField((error as { field: string }).field);
       }
     }
   };
@@ -74,10 +75,16 @@ function Registration() {
             />
             {errors.name && (
               <span className="outfit  text-Red text-[15px] absolute left-0 top-6 w-[90%] ">
-                { errors.name.message}
+                {errors.name.message}
               </span>
             )}
-            <p className="outfit  text-Red text-[15px] absolute left-0 top-6 w-[90%] ">{errorField === 'name' ? errorMessage === "" ? '': errorMessage :""}</p>
+            <p className="outfit  text-Red text-[15px] absolute left-0 top-6 w-[90%] ">
+              {errorField === "name"
+                ? errorMessage === ""
+                  ? ""
+                  : errorMessage
+                : ""}
+            </p>
           </div>
           <div className="relative">
             <input
@@ -93,7 +100,13 @@ function Registration() {
                 {errors.email.message}
               </span>
             )}
-             <p className="outfit  text-Red text-[15px] absolute left-0 top-6 w-[90%] ">{errorField === 'email' ? errorMessage === "" ? '': errorMessage :""}</p>
+            <p className="outfit  text-Red text-[15px] absolute left-0 top-6 w-[90%] ">
+              {errorField === "email"
+                ? errorMessage === ""
+                  ? ""
+                  : errorMessage
+                : ""}
+            </p>
           </div>
           <div className="relative">
             <input
