@@ -18,3 +18,10 @@ export type Recovery = {
     password: string;
     repeatPassword:string
 };
+export type Obj = {
+    name:string
+    email:string
+    avatar:string
+    verify:boolean
+    password: string;
+};

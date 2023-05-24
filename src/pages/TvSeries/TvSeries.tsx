@@ -1,6 +1,6 @@
 import { Obj } from "../../types"
 
-function Home(props:{
+function TvSeries(props:{
     user: Obj
 }){
     return(
@@ -9,4 +9,4 @@ function Home(props:{
         </div>
     )
 }
-export default Home
+export default TvSeries

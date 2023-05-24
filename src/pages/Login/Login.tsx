@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form"
-import { login } from "../../types";
+import { Obj, login } from "../../types";
 import ValidationSchema from "./validations/validation";
 import { useNavigate } from "react-router-dom";
 import { LoginWithEmail, isEmail } from "./LoginNameOrEmail/LoginWithEmail";
@@ -8,7 +8,7 @@ import LoginWithName from "./LoginNameOrEmail/LoginWithName";
 import { useState } from "react";
 import { Logo } from "../../assets";
 function Login(props:{
-  setUser: React.Dispatch<React.SetStateAction<object>>
+  setUser: React.Dispatch<React.SetStateAction<Obj>>
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const navigate = useNavigate();
