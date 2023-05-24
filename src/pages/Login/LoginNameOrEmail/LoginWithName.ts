@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 
 const LoginWithName = async (data: any) => {
   try {
-    const response = await axios.post("http://localhost:3005/api/login/name", {
+    const response = await axios.post("https://movies-doxx.onrender.com/api/login/name", {
       name: data.nameOrEmail,
       password: data.password,
     });

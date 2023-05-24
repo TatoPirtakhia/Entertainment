@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import SendEmailicon from "../../assets/Send";
+import SendEmailicon from "../../assets/SendEmailicon";
 
 function SendEmail() {
   const navigate = useNavigate();

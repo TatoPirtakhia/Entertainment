@@ -1,4 +1,4 @@
-function Bookmark() {
+function NavBookmark() {
   return (
     <svg width="17" height="20" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -8,4 +8,4 @@ function Bookmark() {
     </svg>
   );
 }
-export default Bookmark;
+export default NavBookmark;

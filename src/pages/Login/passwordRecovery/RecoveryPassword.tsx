@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import Logo from "../../../assets/logo";
+import Logo from "../../../assets/Logo";
 import { Recovery } from "../../../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import PasswordSchema from "../validations/PasswordValidation";

@@ -1,4 +1,4 @@
-import Logo from "../../assets/logo";
+import Logo from "../../assets/Logo";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Inputs } from "../../types";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -30,7 +30,7 @@ function Registration() {
       formData.append("name", data.name);
       formData.append(
         "redirectLink",
-        "http://192.168.100.6:5173/VerifyAccount"
+        "entertainment-i5nh23ki5-tatopirtakhia.vercel.app/VerifyAccount"
       );
       formData.append("email", data.email);
       formData.append("password", data.password);

@@ -2,13 +2,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { login } from "../../types";
 import ValidationSchema from "./validations/validation";
-import Logo from "../../assets/logo";
 import { useNavigate } from "react-router-dom";
 import { LoginWithEmail, isEmail } from "./LoginNameOrEmail/LoginWithEmail";
 import LoginWithName from "./LoginNameOrEmail/LoginWithName";
 import { useState } from "react";
-function Login() {
-  const [tokem,setToken] = useState<string>('')
+import { Logo } from "../../assets";
+function Login(props:{
+  setUser: React.Dispatch<React.SetStateAction<object>>
+}) {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const navigate = useNavigate();
   const {
@@ -24,13 +25,19 @@ function Login() {
   const onSubmit: SubmitHandler<login> = async (data) => {
     if (isEmail(data.nameOrEmail)) {
       try {
-        setToken(await LoginWithEmail(data));
+        const token = await LoginWithEmail(data);
+        const url = `/home?token=${encodeURIComponent(token.token)}`
+        props.setUser(token.user)
+        navigate(url)
       } catch (error) {
         setErrorMessage((error as { message: string }).message);
       }
     }else {
       try {
-        setToken(await LoginWithName(data));
+        const token = await LoginWithName(data);
+        const url = `/home?token=${encodeURIComponent(token.token)}`
+        props.setUser(token.user)
+        navigate(url)
       } catch (error) {
         setErrorMessage((error as { message: string }).message);
       }

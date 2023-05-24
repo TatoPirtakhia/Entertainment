@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import Logo from "../../../assets/logo";
+import Logo from "../../../assets/Logo";
 import { forgotPassword } from "../../../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import EmailValidation from "../validations/EmailValidation";
@@ -11,7 +11,7 @@ function ForgotPassword() {
   const onSubmit: SubmitHandler<forgotPassword> = async (data) => {
     await SendInstructions({
       email: data.email,
-      redirectLink: "http://192.168.100.6:5173/RecoveryPassword",
+      redirectLink: "entertainment-i5nh23ki5-tatopirtakhia.vercel.app/RecoveryPassword",
     });
   };
   const {

@@ -1,4 +1,4 @@
-function TvSeries() {
+function NavTvSeries() {
   return (
     <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -8,4 +8,4 @@ function TvSeries() {
     </svg>
   );
 }
-export default TvSeries;
+export default NavTvSeries;

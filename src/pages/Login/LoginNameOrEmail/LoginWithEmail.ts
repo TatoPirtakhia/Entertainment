@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 
 export const LoginWithEmail = async (data: any) => {
   try {
-    const response  = await axios.post("http://localhost:3005/api/login/email", {
+    const response  = await axios.post("https://movies-doxx.onrender.com/api/login/email", {
       email: data.nameOrEmail,
       password: data.password,
     });

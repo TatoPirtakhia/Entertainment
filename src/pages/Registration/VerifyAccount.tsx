@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Checked from "../../assets/Vector";
+import Checked from "../../assets/Checked";
 import VerifyEmail from "./RequestForVerify";
 
 function VerifiAccount() {

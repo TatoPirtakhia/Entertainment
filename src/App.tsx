@@ -1,22 +1,23 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Registration, SendEmail, VerifiAccount } from "./pages/Registration";
-import Login from "./pages/Login/Login";
-import ForgotPassword from "./pages/Login/passwordRecovery/ForgotPassword";
-import RecoveryPassword from "./pages/Login/passwordRecovery/RecoveryPassword";
+import { ForgotPassword, Login, RecoveryPassword } from "./pages/Login";
+import Home from "./pages/Home/Home";
+import { useState } from "react";
+
 
 function App() {
+  const [user,setUser] = useState<object>({})
   return (
     <div className="w-full h-full ">
       <Routes>
-        <Route path="/" element={<Navigate to="/registration" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setUser={setUser}/>} />
         <Route path="/VerifyAccount" element={<VerifiAccount />} />
         <Route path="/succesfullyCreated" element={<SendEmail />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/RecoveryPassword" element={<RecoveryPassword />} />
-
-        x
+        <Route path="/home" element={<Home />} />
       </Routes>
     </div>
   );
