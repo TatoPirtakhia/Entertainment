@@ -70,7 +70,7 @@ function App() {
         <button onClick={()=>{navigate('/login')}} className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[50px] right-2 ${click?'':'hidden'} `}>Log out</button>
       </nav>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/VerifyAccount" element={<VerifiAccount />} />
