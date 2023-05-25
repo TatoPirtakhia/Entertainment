@@ -10,6 +10,8 @@ import { TvSeries } from "./pages/TvSeries";
 function App() {
   const navigate = useNavigate();
   const [click, setClik] = useState<boolean>(false);
+  const [token, setToken] = useState<boolean>(false);
+
   const [user, setUser] = useState<Obj>({
     name: "",
     email: "",
@@ -22,6 +24,13 @@ function App() {
   useEffect(() => {
     setPath(window.location.pathname);
     setClik(false);
+    const url = window.location.href;
+    const parsedUrl = new URL(url);
+    const Token = parsedUrl.searchParams.get("token");
+
+    if (Token) {
+      setToken(true);
+    }
   }, [window.location.pathname]);
 
   return (
@@ -32,48 +41,107 @@ function App() {
             ? ""
             : "hidden"
         } 
-        w-full h-[56px] bg-SemiDarkBlue flex items-center justify-around relative
+        w-full h-[56px] bg-SemiDarkBlue flex items-center justify-around  fixed z-20
       `}
       >
-        <Logo />
+        <div
+          onClick={() => {
+            const url = window.location.href;
+            const parsedUrl = new URL(url);
+            const token = parsedUrl.searchParams.get("token");
+            if (token !== null) {
+              navigate(`/home?token=${encodeURIComponent(token)}`);
+            } else {
+              navigate("/home");
+            }
+          }}
+        >
+          <Logo />
+        </div>
         <div className="flex w-[40%] justify-between ">
           <div
             onClick={() => {
-              navigate("/home");
+              const url = window.location.href;
+              const parsedUrl = new URL(url);
+              const token = parsedUrl.searchParams.get("token");
+              if (token !== null) {
+                navigate(`/home?token=${encodeURIComponent(token)}`);
+              } else {
+                navigate("/home");
+              }
             }}
           >
             <NavHome path={path} />
           </div>
           <div
             onClick={() => {
-              navigate("/movies");
+              const url = window.location.href;
+              const parsedUrl = new URL(url);
+              const token = parsedUrl.searchParams.get("token");
+              if (token !== null) {
+                navigate(`/movies?token=${encodeURIComponent(token)}`);
+              } else {
+                navigate("/movies");
+              }
             }}
           >
             <NavMovies path={path} />
           </div>
           <div
             onClick={() => {
-              navigate("/tvSeries");
+              const url = window.location.href;
+              const parsedUrl = new URL(url);
+              const token = parsedUrl.searchParams.get("token");
+              if (token !== null) {
+                navigate(`/tvSeries?token=${encodeURIComponent(token)}`);
+              } else {
+                navigate("/tvSeries");
+              }
             }}
           >
             <NavTvSeries path={path} />
           </div>
-          <div
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            <NavBookmark path={path} />
-          </div>
+          {!token ? (
+            ""
+          ) : (
+            <div
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <NavBookmark path={path} />
+            </div>
+          )}
         </div>
-        <img
-          src={user.avatar}
-          alt=""
-          className="w-6 h-6 rounded-[50%]"
-          onClick={() => {
-            setClik(!click);
-          }}
-        />
+        {!token ? (
+          <div>
+            <button
+              onClick={() => {
+                navigate("/login");
+              }}
+              className="outfit text-white font-medium text-[15px] opacity-70"
+            >
+              Sign in /
+            </button>
+            <button
+              onClick={() => {
+                navigate("/registration");
+              }}
+              className="outfit text-white font-medium text-[15px] opacity-70"
+            >
+              Sign up
+            </button>
+          </div>
+        ) : (
+          <img
+            src={user.avatar}
+            alt=""
+            className="w-6 h-6 rounded-[50%]"
+            onClick={() => {
+              setClik(!click);
+            }}
+          />
+        )}
         <button
           onClick={() => {
             navigate("/login");
@@ -94,8 +162,8 @@ function App() {
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/RecoveryPassword" element={<RecoveryPassword />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/movies" element={<Movies user={user} />} />
-        <Route path="/tvSeries" element={<TvSeries user={user} />} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/tvSeries" element={<TvSeries />} />
       </Routes>
     </div>
   );
