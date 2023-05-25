@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { Obj } from "../../types";
 import { GetAllMovies } from ".";
 import { Shearch } from "../..";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { BookMarkEmpty, CategoryMovie } from "../../assets";
-function Home(props: { user: Obj }) {
+function Home() {
   const [data, setData] = useState<any>([]);
 
   useEffect(() => {

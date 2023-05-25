@@ -9,7 +9,7 @@ import { TvSeries } from "./pages/TvSeries";
 
 function App() {
   const navigate = useNavigate();
-  const [click,setClik] = useState<boolean>(false)
+  const [click, setClik] = useState<boolean>(false);
   const [user, setUser] = useState<Obj>({
     name: "",
     email: "",
@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     setPath(window.location.pathname);
-    setClik(false)
+    setClik(false);
   }, [window.location.pathname]);
 
   return (
@@ -66,8 +66,24 @@ function App() {
             <NavBookmark path={path} />
           </div>
         </div>
-        <img src={user.avatar} alt="" className="w-6 h-6 rounded-[50%]" onClick={()=>{setClik(!click)}} />
-        <button onClick={()=>{navigate('/login')}} className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[50px] right-2 ${click?'':'hidden'} `}>Log out</button>
+        <img
+          src={user.avatar}
+          alt=""
+          className="w-6 h-6 rounded-[50%]"
+          onClick={() => {
+            setClik(!click);
+          }}
+        />
+        <button
+          onClick={() => {
+            navigate("/login");
+          }}
+          className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[50px] right-2 ${
+            click ? "" : "hidden"
+          } `}
+        >
+          Log out
+        </button>
       </nav>
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
@@ -77,7 +93,7 @@ function App() {
         <Route path="/succesfullyCreated" element={<SendEmail />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/RecoveryPassword" element={<RecoveryPassword />} />
-        <Route path="/home" element={<Home user={user} />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/movies" element={<Movies user={user} />} />
         <Route path="/tvSeries" element={<TvSeries user={user} />} />
       </Routes>
