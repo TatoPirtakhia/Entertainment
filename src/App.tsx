@@ -136,7 +136,7 @@ function App() {
           <img
             src={user.avatar}
             alt=""
-            className="w-6 h-6 rounded-[50%]"
+            className="w-6 h-6 md:h-[40px] md:w-[40px] rounded-[50%]"
             onClick={() => {
               setClik(!click);
             }}
@@ -144,9 +144,11 @@ function App() {
         )}
         <button
           onClick={() => {
-            navigate("/login");
+            navigate("/home");
+            setClik(!click);
+            setToken(false)
           }}
-          className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[50px] right-2 ${
+          className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[50px] right-2 md:right-12 md:top-[60px] ${
             click ? "" : "hidden"
           } `}
         >

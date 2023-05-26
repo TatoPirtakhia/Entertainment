@@ -4,7 +4,7 @@ import { Shearch } from "../..";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { BookMarkEmpty, CategoryMovie } from "../../assets";
+import { BookMarkEmpty, CategoryMovie, CategoryTv } from "../../assets";
 function Home() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [data, setData] = useState<any>([]);
@@ -90,7 +90,12 @@ function Home() {
                   <ul className="flex gap-4 text-white outfit font-[300] text-[12px] md:text-[15px] opacity-75   ">
                     <li>{movie.year}</li>
                     <li className="flex items-center gap-2">
-                      <CategoryMovie />
+                      {movie.category === "Movie" ? (
+                        <CategoryMovie />
+                      ) : (
+                        <CategoryTv />
+                      )}
+
                       {movie.category}
                     </li>
                     <li>{movie.rating}</li>
@@ -140,7 +145,11 @@ function Home() {
                         <ul className="flex gap-4 text-white outfit font-[300] text-[12px]  md:text-[15px] opacity-75 absolute bottom-[39px] md:bottom-[55px] left-4 md:left-6 ">
                           <li>{movie.year}</li>
                           <li className="flex items-center gap-2">
-                            <CategoryMovie />
+                            {movie.category === "Movie" ? (
+                              <CategoryMovie />
+                            ) : (
+                              <CategoryTv />
+                            )}
                             {movie.category}
                           </li>
                           <li>{movie.rating}</li>
@@ -182,12 +191,16 @@ function Home() {
                     <ul className="flex gap-4 text-white outfit font-[300] text-[12px] md:text-[14px] opacity-75   ">
                       <li>{movie.year}</li>
                       <li className="flex items-center gap-2">
-                        <CategoryMovie />
+                        {movie.category === "Movie" ? (
+                          <CategoryMovie />
+                        ) : (
+                          <CategoryTv />
+                        )}
                         {movie.category}
                       </li>
                       <li>{movie.rating}</li>
                     </ul>
-                    <h1 className="  outfit text-white text-[14px] md:text-[19px] font-medium">
+                    <h1 className="outfit text-white text-[14px] md:text-[19px] font-medium">
                       {movie.title}
                     </h1>
                   </div>
