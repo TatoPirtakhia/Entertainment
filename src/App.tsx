@@ -41,7 +41,7 @@ function App() {
             ? ""
             : "hidden"
         } 
-        w-full h-[56px] bg-SemiDarkBlue flex items-center justify-around  fixed z-20
+        w-full h-[56px] md:w-[95%] md:h-[72px]  md:top-6 md:ml-[2.5%] bg-SemiDarkBlue flex items-center justify-around  fixed z-20
       `}
       >
         <div
@@ -58,7 +58,7 @@ function App() {
         >
           <Logo />
         </div>
-        <div className="flex w-[40%] justify-between ">
+        <div className="flex w-[40%] justify-between md:justify-center md:gap-8 md:flex-row">
           <div
             onClick={() => {
               const url = window.location.href;
@@ -119,7 +119,7 @@ function App() {
               onClick={() => {
                 navigate("/login");
               }}
-              className="outfit text-white font-medium text-[15px] opacity-70"
+              className="outfit text-white font-medium text-[15px] md:text-[24px] opacity-70"
             >
               Sign in /
             </button>
@@ -127,7 +127,7 @@ function App() {
               onClick={() => {
                 navigate("/registration");
               }}
-              className="outfit text-white font-medium text-[15px] opacity-70"
+              className="outfit text-white font-medium text-[15px] md:text-[24px] opacity-70"
             >
               Sign up
             </button>

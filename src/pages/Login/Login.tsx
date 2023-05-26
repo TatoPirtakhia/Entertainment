@@ -53,7 +53,7 @@ function Login(props: { setUser: React.Dispatch<React.SetStateAction<Obj>> }) {
       >
         <Logo />
       </div>
-      <div className="mt-[60px] w-[87%] bg-SemiDarkBlue  pt-6 pl-6 rounded-[10px] ">
+      <div className="mt-[60px] w-[400px] bg-SemiDarkBlue  pt-6 pl-6 rounded-[10px] ">
         <h1 className="outfit font-[300] text-white text-[32px]">Login</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-1">
           <div className="relative">
