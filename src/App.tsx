@@ -9,6 +9,7 @@ import { TvSeries } from "./pages/TvSeries";
 
 function App() {
   const navigate = useNavigate();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [click, setClik] = useState<boolean>(false);
   const [token, setToken] = useState<boolean>(false);
   const [example, setExample] = useState<boolean>(false);
@@ -17,6 +18,11 @@ function App() {
     avatar:''
   });
   useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+
     const data = localStorage.getItem("USER");
     if (data) {
       setAvatar(JSON.parse(data));
@@ -58,8 +64,6 @@ function App() {
     setIsHoveredHome(false);
   };
 
-
-
   const handleMouseEnterMovie = () => {
     setIsHoveredMovie(true);
   };
@@ -68,8 +72,6 @@ function App() {
     setIsHoveredMovie(false);
   };
 
-
-
   const handleMouseEnterTv = () => {
     setIsHoveredTv(true);
   };
@@ -77,10 +79,6 @@ function App() {
   const handleMouseLeaveTv = () => {
     setIsHoveredTv(false);
   };
-
-
-
-
   const handleMouseEnterBook = () => {
     setIsHoveredBookmark(true);
   };
@@ -129,7 +127,7 @@ function App() {
               }
             }}
           >
-            <NavHome path={path} isHoveredHome={isHoveredHome} />
+            <NavHome path={path} isHoveredHome={isHoveredHome} windowWidth={windowWidth} />
           </div>
           <div
             onMouseEnter={handleMouseEnterMovie}
@@ -145,7 +143,7 @@ function App() {
               }
             }}
           >
-            <NavMovies path={path} isHoveredMovie={isHoveredMovie} />
+            <NavMovies path={path} isHoveredMovie={isHoveredMovie} windowWidth={windowWidth} />
           </div>
           <div
             onMouseEnter={handleMouseEnterTv}
@@ -161,7 +159,7 @@ function App() {
               }
             }}
           >
-            <NavTvSeries path={path} isHoveredTv={isHoveredTv} />
+            <NavTvSeries path={path} isHoveredTv={isHoveredTv} windowWidth={windowWidth} />
           </div>
           {!token ? (
             ""
@@ -173,7 +171,7 @@ function App() {
                 navigate("/");
               }}
             >
-              <NavBookmark path={path}  isHoveredBookmark={isHoveredBookmark}/>
+              <NavBookmark path={path}  isHoveredBookmark={isHoveredBookmark} windowWidth={windowWidth}/>
             </div>
           )}
         </div>

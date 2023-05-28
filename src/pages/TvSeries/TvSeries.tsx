@@ -55,7 +55,7 @@ function TvSeries() {
           {`Found ${count} results for '${inpitValue}'`}
         </h1>
       ) : count > 0 ? (
-        <div className="flex flex-wrap  gap-4 md:gap-8 w-[95%] xl:w-full justify-start ">
+        <div className="flex flex-wrap  gap-4 md:gap-8 w-[95%] xl:w-full justify-center xl:justify-start ">
           <h1 className="outfit mb-4 font-[300] text-white text-[20px] md:text-[32px] w-[90%] z-20">
             {`Found ${count} results for '${inpitValue}'`}
           </h1>
@@ -74,7 +74,7 @@ function TvSeries() {
           <h1 className="outfit  font-[300] text-white text-[20px] md:text-[32px] w-[90%]">
             TV Series
           </h1>
-          <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-start mt-6">
+          <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-center xl:justify-start mt-6">
             {tvSeries.map((movie: any) => {
               return (
                 <MovieItem
