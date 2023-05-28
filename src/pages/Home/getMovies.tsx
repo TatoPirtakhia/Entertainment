@@ -27,7 +27,7 @@ function MovieItem(props: { movie: any; windowWidth: number }) {
         onMouseEnter={handleMouseEnterMovies}
         onMouseLeave={handleMouseLeaveMovies}
         key={props.movie.title}
-        className="rounded-[8px] cursor-pointer relative w-[164px] h-[154px] md:w-[220px] md:h-[192px] xl:w-[280px] xl:h-[226px] flex flex-col mb-4"
+        className="rounded-[8px] cursor-pointer relative w-[164px] h-[154px] md:w-[220px] md:h-[192px] xl:w-[280px] xl:h-[226px] flex flex-col items-center mb-4"
       >
         <div
           onMouseEnter={handleMouseEnter}

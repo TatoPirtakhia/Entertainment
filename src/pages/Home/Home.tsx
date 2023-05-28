@@ -67,7 +67,7 @@ function Home() {
           {`Found ${count} results for '${inpitValue}'`}
         </h1>
       ) : count > 0 ? (
-        <div className="flex flex-wrap gap-4 w-[95%] justify-start ">
+        <div className="flex flex-wrap gap-4 w-full justify-center    xl:justify-start ">
           <h1 className="outfit mb-4 font-[300] text-white text-[20px] md:text-[32px] w-[95%] z-20">
             {`Found ${count} results for '${inpitValue}'`}
           </h1>
@@ -105,7 +105,7 @@ function Home() {
           <h1 className="outfit font-[300] text-white text-xl w-[90%] mt-6 md:text-[32px] ">
             Recommended for you
           </h1>
-          <div className="flex flex-wrap gap-4 md:gap-[30px] xd:gap-10 xl:w-full w-[95%] justify-start mt-6">
+          <div className="flex flex-wrap gap-4 md:gap-[30px] xd:gap-10 xl:w-full w-[95%] justify-center  xl:justify-start mt-6">
             {data.map((movie: any) => {
               return (
                 !movie.isTrending && (

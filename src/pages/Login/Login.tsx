@@ -84,7 +84,7 @@ function Login(props: {
           <div className="relative">
             <input
               {...register("password", { required: true })}
-              type="text"
+              type="password"
               placeholder="Password"
               className={`w-[90%] cursor-pointer border-b-[1px] xl:hover:border-white  bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5  ${
                 errors && errors.password
