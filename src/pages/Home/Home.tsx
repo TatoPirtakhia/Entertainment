@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { GetAllMovies, MovieItem, TrendingMovieItem } from ".";
-import { Play, Shearch } from "../..";
+import { Shearch } from "../..";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { BookMarkEmpty, CategoryMovie, CategoryTv } from "../../assets";
 function Home() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [data, setData] = useState<any>([]);
