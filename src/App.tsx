@@ -32,7 +32,49 @@ function App() {
       setToken(true);
     }
   }, [window.location.pathname]);
+  const [isHoveredHome, setIsHoveredHome] = useState(false);
+  const [isHoveredMovie, setIsHoveredMovie] = useState(false);
+  const [isHoveredTv, setIsHoveredTv] = useState(false);
+  const [isHoveredBookmark, setIsHoveredBookmark] = useState(false);
 
+  const handleMouseEnterHome = () => {
+    setIsHoveredHome(true);
+  };
+
+  const handleMouseLeaveHome = () => {
+    setIsHoveredHome(false);
+  };
+
+
+
+  const handleMouseEnterMovie = () => {
+    setIsHoveredMovie(true);
+  };
+
+  const handleMouseLeaveMovie = () => {
+    setIsHoveredMovie(false);
+  };
+
+
+
+  const handleMouseEnterTv = () => {
+    setIsHoveredTv(true);
+  };
+
+  const handleMouseLeaveTv = () => {
+    setIsHoveredTv(false);
+  };
+
+
+
+
+  const handleMouseEnterBook = () => {
+    setIsHoveredBookmark(true);
+  };
+
+  const handleMouseLeaveBook = () => {
+    setIsHoveredBookmark(false);
+  };
   return (
     <div className="w-full h-full ">
       <nav
@@ -41,8 +83,9 @@ function App() {
             ? ""
             : "hidden"
         } 
-        w-full h-[56px] md:w-[95%] md:h-[72px]  md:top-6 md:ml-[2.5%] bg-SemiDarkBlue flex items-center justify-around  fixed z-20
-      `}
+        w-full h-[56px] md:w-[95%] md:h-[72px]  md:top-6 md:ml-[2.5%] bg-SemiDarkBlue flex items-center justify-around xl:justify-none xl:justify-start fixed z-20
+        xl:flex-col  xl:h-[95%] xl:w-[96px] xl:ml-[2%] xl:pt-[35px]
+        `}
       >
         <div
           onClick={() => {
@@ -58,8 +101,10 @@ function App() {
         >
           <Logo />
         </div>
-        <div className="flex w-[40%] justify-between md:justify-center md:gap-8 md:flex-row">
+        <div className="flex w-[40%] justify-between md:justify-center md:gap-8 md:flex-row xl:flex-col xl:items-center xl:mt-[75px]">
           <div
+            onMouseEnter={handleMouseEnterHome}
+            onMouseLeave={handleMouseLeaveHome}
             onClick={() => {
               const url = window.location.href;
               const parsedUrl = new URL(url);
@@ -71,9 +116,11 @@ function App() {
               }
             }}
           >
-            <NavHome path={path} />
+            <NavHome path={path} isHoveredHome={isHoveredHome} />
           </div>
           <div
+            onMouseEnter={handleMouseEnterMovie}
+            onMouseLeave={handleMouseLeaveMovie}
             onClick={() => {
               const url = window.location.href;
               const parsedUrl = new URL(url);
@@ -85,9 +132,11 @@ function App() {
               }
             }}
           >
-            <NavMovies path={path} />
+            <NavMovies path={path} isHoveredMovie={isHoveredMovie} />
           </div>
           <div
+            onMouseEnter={handleMouseEnterTv}
+            onMouseLeave={handleMouseLeaveTv}
             onClick={() => {
               const url = window.location.href;
               const parsedUrl = new URL(url);
@@ -99,35 +148,40 @@ function App() {
               }
             }}
           >
-            <NavTvSeries path={path} />
+            <NavTvSeries path={path} isHoveredTv={isHoveredTv} />
           </div>
           {!token ? (
             ""
           ) : (
             <div
+            onMouseEnter={handleMouseEnterBook}
+            onMouseLeave={handleMouseLeaveBook}
               onClick={() => {
                 navigate("/");
               }}
             >
-              <NavBookmark path={path} />
+              <NavBookmark path={path}  isHoveredBookmark={isHoveredBookmark}/>
             </div>
           )}
         </div>
         {!token ? (
-          <div>
+          <div className="xl:mt-[500px] flex  xl:flex-col xl:items-center ">
             <button
               onClick={() => {
                 navigate("/login");
               }}
-              className="outfit text-white font-medium text-[15px] md:text-[24px] opacity-70"
+              className="outfit text-white font-medium text-[15px] md:text-[24px] opacity-70 xl:hover:text-Red"
             >
-              Sign in /
+              Sign in
             </button>
+            <p className="outfit text-white font-medium text-[15px] md:text-[24px]">
+              /
+            </p>
             <button
               onClick={() => {
                 navigate("/registration");
               }}
-              className="outfit text-white font-medium text-[15px] md:text-[24px] opacity-70"
+              className="outfit text-white font-medium text-[15px] md:text-[24px] opacity-70 xl:hover:text-Red"
             >
               Sign up
             </button>
@@ -136,7 +190,7 @@ function App() {
           <img
             src={user.avatar}
             alt=""
-            className="w-6 h-6 md:h-[40px] md:w-[40px] rounded-[50%]"
+            className="w-6 h-6 md:h-[40px] md:w-[40px] rounded-[50%] xl:mt-[550px]"
             onClick={() => {
               setClik(!click);
             }}
@@ -146,7 +200,7 @@ function App() {
           onClick={() => {
             navigate("/home");
             setClik(!click);
-            setToken(false)
+            setToken(false);
           }}
           className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[50px] right-2 md:right-12 md:top-[60px] ${
             click ? "" : "hidden"

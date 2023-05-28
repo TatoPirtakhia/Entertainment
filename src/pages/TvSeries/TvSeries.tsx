@@ -37,6 +37,15 @@ function TvSeries() {
 
     fetchData();
   }, []);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -102,7 +111,7 @@ function TvSeries() {
                   className="rounded-[8px] relative w-[164px] h-[154px] md:w-[220px] md:h-[192px] flex flex-col mb-4"
                 >
                   <div className="absolute top-2 left-[124px] md:top-4 md:left-[172px] z-10 w-8 h-8 bg bg-DarkBlue bg-opacity-50 rounded-[50%] flex justify-center items-center ">
-                    <BookMarkEmpty />
+                    <BookMarkEmpty  />
                   </div>
                   <img
                     src={

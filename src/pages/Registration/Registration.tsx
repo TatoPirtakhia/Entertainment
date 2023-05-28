@@ -58,7 +58,7 @@ function Registration() {
     }
   };
   return (
-    <div className="w-full flex flex-col items-center pt-12">
+    <div className="w-full flex flex-col items-center pt-12 xl:pt-[80px]">
       <div
         onClick={() => {
           navigate("/home");
@@ -66,7 +66,7 @@ function Registration() {
       >
         <Logo />
       </div>
-      <div className="mt-[60px] w-[400px] bg-SemiDarkBlue  pt-6 pl-6 rounded-[10px] ">
+      <div className="mt-[60px] xl:mt-[80px] w-[400px] bg-SemiDarkBlue  pt-6 pl-6 rounded-[10px] ">
         <h1 className="outfit font-[300] text-white text-[32px]">Sign Up</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-10">
           <div className="relative">
@@ -74,7 +74,7 @@ function Registration() {
               {...register("name", { required: true })}
               type="text"
               placeholder="Name"
-              className={`w-[90%] mb-6 bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5 border-b-[1px] ${
+              className={`w-[90%] cursor-pointer xl:hover:border-white mb-6 bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5 border-b-[1px] ${
                 errors && errors.name ? " border-Red" : "border-[#5A698F]"
               }`}
             />
@@ -96,7 +96,7 @@ function Registration() {
               {...register("email", { required: true })}
               type="email"
               placeholder="Email address"
-              className={`w-[90%] mb-6 bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5 border-b-[1px]  ${
+              className={`w-[90%] cursor-pointer xl:hover:border-white mb-6 bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5 border-b-[1px]  ${
                 errors && errors.email ? " border-Red" : "border-[#5A698F]"
               }`}
             />
@@ -105,7 +105,7 @@ function Registration() {
                 {errors.email.message}
               </span>
             )}
-            <p className="outfit  text-Red text-[15px] absolute left-0 top-6 w-[90%] ">
+            <p className="outfit   text-Red text-[15px] absolute left-0 top-6 w-[90%] ">
               {errorField === "email"
                 ? errorMessage === ""
                   ? ""
@@ -118,7 +118,7 @@ function Registration() {
               {...register("password", { required: true })}
               type="text"
               placeholder="Password"
-              className={`w-[90%] mb-6 bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5 border-b-[1px]  ${
+              className={`w-[90%] cursor-pointer xl:hover:border-white mb-6 bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5 border-b-[1px]  ${
                 errors && errors.password ? " border-Red" : "border-[#5A698F]"
               }`}
             />
@@ -133,7 +133,7 @@ function Registration() {
               {...register("repeatPassword", { required: true })}
               type="text"
               placeholder="Repeat Password"
-              className={`w-[90%] bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5 border-b-[1px]  ${
+              className={`w-[90%] cursor-pointer xl:hover:border-white bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5 border-b-[1px]  ${
                 errors && errors.repeatPassword
                   ? " border-Red"
                   : "border-[#5A698F]"
@@ -160,7 +160,7 @@ function Registration() {
 
         <button
           onClick={ButtonClick}
-          className="w-[90%] mb-6 h-12 bg-Red rounded-[6px] outfit text-white font-[300] text-[15px] "
+          className="w-[90%] mb-6 h-12 bg-Red rounded-[6px] outfit text-white font-[300] text-[15px] xl:hover:cursor-pointer xl:hover:bg-white xl:hover:text-DarkBlue "
         >
           Create an account
         </button>

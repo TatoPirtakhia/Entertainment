@@ -45,7 +45,7 @@ function Login(props: { setUser: React.Dispatch<React.SetStateAction<Obj>> }) {
     handleSubmit(onSubmit)();
   };
   return (
-    <div className="w-full flex flex-col items-center pt-12">
+    <div className="w-full flex flex-col items-center pt-12 xl:pt-[80px]">
       <div
         onClick={() => {
           navigate("/home");
@@ -53,7 +53,7 @@ function Login(props: { setUser: React.Dispatch<React.SetStateAction<Obj>> }) {
       >
         <Logo />
       </div>
-      <div className="mt-[60px] w-[400px] bg-SemiDarkBlue  pt-6 pl-6 rounded-[10px] ">
+      <div className="mt-[60px] xl:mt-[80px] w-[400px] bg-SemiDarkBlue  pt-6 pl-6 rounded-[10px] ">
         <h1 className="outfit font-[300] text-white text-[32px]">Login</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-1">
           <div className="relative">
@@ -61,7 +61,7 @@ function Login(props: { setUser: React.Dispatch<React.SetStateAction<Obj>> }) {
               {...register("nameOrEmail", { required: true })}
               type="text"
               placeholder="Name or Email"
-              className={`w-[90%]  mb-6 bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5 border-b-[1px] ${
+              className={`w-[90%] mb-6 bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5 border-b-[1px] cursor-pointer xl:hover:border-white ${
                 errors && errors.nameOrEmail ? "border-Red" : "border-[#5A698F]"
               }   `}
             />
@@ -79,7 +79,7 @@ function Login(props: { setUser: React.Dispatch<React.SetStateAction<Obj>> }) {
               {...register("password", { required: true })}
               type="text"
               placeholder="Password"
-              className={`w-[90%]  bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5 border-b-[1px] ${
+              className={`w-[90%] cursor-pointer border-b-[1px] xl:hover:border-white  bg-SemiDarkBlue pl-4 outfit font-[300] text-[15px] text-white outline-none pb-5  ${
                 errors && errors.password
                   ? "pb-[67px] border-Red"
                   : "border-[#5A698F]"
@@ -102,7 +102,7 @@ function Login(props: { setUser: React.Dispatch<React.SetStateAction<Obj>> }) {
         </p>
         <button
           onClick={ButtonClick}
-          className="w-[90%] mb-6 h-12 bg-Red rounded-[6px] outfit text-white font-[300] text-[15px] "
+          className="w-[90%] mb-6 h-12 bg-Red rounded-[6px] outfit text-white font-[300] text-[15px] xl:hover:cursor-pointer xl:hover:bg-white xl:hover:text-DarkBlue "
         >
           Login to your account
         </button>
