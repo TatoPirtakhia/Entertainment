@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { BookMarkEmpty, CategoryTv, Shearch } from "../..";
+import { Shearch } from "../..";
 import { getTvSeries } from ".";
+import { MovieItem } from "../Home";
 
 function TvSeries() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -39,53 +40,32 @@ function TvSeries() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex gap-[4%] w-[90%] items-center mt-[70px] md:mt-[130px] mb-6">
+    <div className="flex flex-col items-center xl:items-start xl:ml-[160px]">
+      <div className="flex gap-[4%] w-[90%] items-center mt-[70px] md:mt-[130px] xl:mt-[65px] mb-6">
         <Shearch />
         <input
           onInput={input}
           type="text"
-          className="outfit pl-1 bg-DarkBlue outline-none text-white text-[16px] md:text-[24px] w-[95%] "
+          className="outfit xl:h-10 caret-Red pl-1 bg-DarkBlue outline-none text-white text-[16px] w-[90%] md:text-[24px] xl:cursor-pointer xl:hover:border-b-[1px] xl:hover:border-[#5A698F]  "
           placeholder="Search for TV series"
         />
       </div>
-      {count > 0 ? (
-        <div className="flex flex-wrap  gap-4 md:gap-8 w-[95%] justify-start ">
+      {count === 0 && inpitValue !== "" ? (
+        <h1 className="outfit mb-4 font-[300] text-white text-[20px] md:text-[32px] w-[95%] z-20">
+          {`Found ${count} results for '${inpitValue}'`}
+        </h1>
+      ) : count > 0 ? (
+        <div className="flex flex-wrap  gap-4 md:gap-8 w-[95%] xl:w-full justify-start ">
           <h1 className="outfit mb-4 font-[300] text-white text-[20px] md:text-[32px] w-[90%] z-20">
             {`Found ${count} results for '${inpitValue}'`}
           </h1>
           {newData.map((movie: any) => {
             return (
-              <div
+              <MovieItem
+                movie={movie}
+                windowWidth={windowWidth}
                 key={movie.title}
-                className="rounded-[8px] relative w-[164px] h-[154px] md:w-[220px] md:h-[192px] flex flex-col mb-4"
-              >
-                <div className="absolute top-2 left-[124px] md:top-4 md:left-[172px] z-10 w-8 h-8 bg bg-DarkBlue bg-opacity-50 rounded-[50%] flex justify-center items-center ">
-                  <BookMarkEmpty />
-                </div>
-                <img
-                  src={
-                    windowWidth >= 768
-                      ? movie.thumbnail.regular.medium
-                      : movie.thumbnail.regular.small
-                  }
-                  alt="image"
-                  className="rounded-[8px] z-0 "
-                />
-                <div className="w-full h-[50px] flex flex-col gap-[4px] mt-2">
-                  <ul className="flex gap-4 text-white outfit font-[300] text-[12px] md:text-[15px] opacity-75   ">
-                    <li>{movie.year}</li>
-                    <li className="flex items-center gap-2">
-                      <CategoryTv />
-                      {movie.category}
-                    </li>
-                    <li>{movie.rating}</li>
-                  </ul>
-                  <h1 className="  outfit text-white text-[14px] md:text-[19px] font-medium">
-                    {movie.title}
-                  </h1>
-                </div>
-              </div>
+              />
             );
           })}
         </div>
@@ -94,41 +74,14 @@ function TvSeries() {
           <h1 className="outfit  font-[300] text-white text-[20px] md:text-[32px] w-[90%]">
             TV Series
           </h1>
-          <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] justify-start mt-6">
+          <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-start mt-6">
             {tvSeries.map((movie: any) => {
-              return !movie.isTrending ? (
-                <div
+              return (
+                <MovieItem
+                  movie={movie}
+                  windowWidth={windowWidth}
                   key={movie.title}
-                  className="rounded-[8px] relative w-[164px] h-[154px] md:w-[220px] md:h-[192px] flex flex-col mb-4"
-                >
-                  <div className="absolute top-2 left-[124px] md:top-4 md:left-[172px] z-10 w-8 h-8 bg bg-DarkBlue bg-opacity-50 rounded-[50%] flex justify-center items-center ">
-                    <BookMarkEmpty />
-                  </div>
-                  <img
-                    src={
-                      windowWidth >= 768
-                        ? movie.thumbnail.regular.medium
-                        : movie.thumbnail.regular.small
-                    }
-                    alt="image"
-                    className="rounded-[8px] z-0 "
-                  />
-                  <div className="w-full h-[50px] flex flex-col gap-[4px] mt-2">
-                    <ul className="flex gap-4 text-white outfit font-[300] text-[12px] md:text-[15px] opacity-75   ">
-                      <li>{movie.year}</li>
-                      <li className="flex items-center gap-2">
-                        <CategoryTv />
-                        {movie.category}
-                      </li>
-                      <li>{movie.rating}</li>
-                    </ul>
-                    <h1 className="  outfit text-white text-[14px] md:text-[19px] font-medium">
-                      {movie.title}
-                    </h1>
-                  </div>
-                </div>
-              ) : (
-                ""
+                />
               );
             })}
           </div>

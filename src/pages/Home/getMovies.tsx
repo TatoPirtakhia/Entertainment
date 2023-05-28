@@ -32,9 +32,10 @@ function MovieItem(props: { movie: any; windowWidth: number }) {
         <div
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          id={props.movie.title}
           className="absolute cursor-pointer xl:hover:bg-white top-2 left-[124px] md:left-[172px] md:top-4 xl:left-[232px] z-20 w-8 h-8 bg bg-DarkBlue bg-opacity-50 rounded-[50%] flex justify-center items-center "
         >
-          <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
+          <svg width="12"  height="14" xmlns="http://www.w3.org/2000/svg">
             <path
               d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z"
               stroke={isHovered ? "#000" : "#FFF"}

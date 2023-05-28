@@ -4,21 +4,34 @@ import { ForgotPassword, Login, RecoveryPassword } from "./pages/Login";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home/Home";
 import { Logo, Movies, NavBookmark, NavHome, NavMovies, NavTvSeries } from ".";
-import { Obj } from "./types";
+import {  avatar } from "./types";
 import { TvSeries } from "./pages/TvSeries";
 
 function App() {
   const navigate = useNavigate();
   const [click, setClik] = useState<boolean>(false);
   const [token, setToken] = useState<boolean>(false);
-
-  const [user, setUser] = useState<Obj>({
-    name: "",
-    email: "",
-    avatar: "",
-    verify: false,
-    password: "",
+  const [example, setExample] = useState<boolean>(false);
+ 
+  const [avatar, setAvatar] = useState<avatar>({
+    avatar:''
   });
+  useEffect(() => {
+    const data = localStorage.getItem("USER");
+    if (data) {
+      setAvatar(JSON.parse(data));
+    }
+    setExample(true);
+  }, []);
+
+
+
+  useEffect(() => {
+    if (example) {
+      localStorage.setItem("USER", JSON.stringify(avatar));
+    }
+  }, [avatar]);
+
   const [path, setPath] = useState<string>("");
 
   useEffect(() => {
@@ -84,7 +97,7 @@ function App() {
             : "hidden"
         } 
         w-full h-[56px] md:w-[95%] md:h-[72px]  md:top-6 md:ml-[2.5%] bg-SemiDarkBlue flex items-center justify-around xl:justify-none xl:justify-start fixed z-20
-        xl:flex-col  xl:h-[95%] xl:w-[96px] xl:ml-[2%] xl:pt-[35px]
+        xl:flex-col  xl:h-[95%] xl:w-[96px] xl:ml-[2%] xl:pt-[35px] xl:rounded-[20px]
         `}
       >
         <div
@@ -187,32 +200,36 @@ function App() {
             </button>
           </div>
         ) : (
+          <div className="relative w-[40px] xl:mt-[550px]">
           <img
-            src={user.avatar}
+            src={avatar.avatar}
             alt=""
-            className="w-6 h-6 md:h-[40px] md:w-[40px] rounded-[50%] xl:mt-[550px]"
+            className="w-6 h-6 md:h-[40px] md:w-[40px] rounded-[50%] "
             onClick={() => {
               setClik(!click);
             }}
           />
-        )}
-        <button
+           <button
           onClick={() => {
             navigate("/home");
             setClik(!click);
             setToken(false);
+            setAvatar({avatar:''})
           }}
-          className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[50px] right-2 md:right-12 md:top-[60px] ${
+          className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[30px] right-1 md:right-0 md:top-[50px] xl:top-[-40px] xl:left-[-7px] xl:hover:text-Red ${
             click ? "" : "hidden"
           } `}
         >
           Log out
         </button>
+          </div>
+        )}
+       
       </nav>
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/login" element={<Login  setAvatar={setAvatar} />} />
         <Route path="/VerifyAccount" element={<VerifiAccount />} />
         <Route path="/succesfullyCreated" element={<SendEmail />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />

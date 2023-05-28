@@ -1,27 +1,24 @@
 export type Inputs = {
-    email: string;
-    name: string;
-    password:string
-    repeatPassword:string,
-    
+  email: string;
+  name: string;
+  password: string;
+  repeatPassword: string;
 };
 export type login = {
-    nameOrEmail: string;
-    password:string
+  nameOrEmail: string;
+  password: string;
 };
 
 export type forgotPassword = {
-    email: string;
+  email: string;
 };
 
 export type Recovery = {
-    password: string;
-    repeatPassword:string
+  password: string;
+  repeatPassword: string;
 };
-export type Obj = {
-    name:string
-    email:string
-    avatar:string
-    verify:boolean
-    password: string;
+
+
+export type avatar = {
+  avatar: string;
 };

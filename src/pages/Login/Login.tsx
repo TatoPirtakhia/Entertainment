@@ -1,14 +1,17 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Obj, login } from "../../types";
+import { avatar, login } from "../../types";
 import ValidationSchema from "./validations/validation";
 import { useNavigate } from "react-router-dom";
 import { LoginWithEmail, isEmail } from "./LoginNameOrEmail/LoginWithEmail";
 import LoginWithName from "./LoginNameOrEmail/LoginWithName";
 import { useState } from "react";
 import { Logo } from "../../assets";
-function Login(props: { setUser: React.Dispatch<React.SetStateAction<Obj>> }) {
+function Login(props: {
+  setAvatar: React.Dispatch<React.SetStateAction<avatar>>;
+}) {
   const [errorMessage, setErrorMessage] = useState<string>("");
+
   const navigate = useNavigate();
   const {
     register,
@@ -20,13 +23,15 @@ function Login(props: { setUser: React.Dispatch<React.SetStateAction<Obj>> }) {
   const goToRegistration = () => {
     navigate("/registration");
   };
+
   const onSubmit: SubmitHandler<login> = async (data) => {
     if (isEmail(data.nameOrEmail)) {
       try {
         const token = await LoginWithEmail(data);
         const url = `/home?token=${encodeURIComponent(token.token)}`;
-        props.setUser(token.user);
         navigate(url);
+        const img = token.user.avatar;
+        props.setAvatar({ avatar: img });
       } catch (error) {
         setErrorMessage((error as { message: string }).message);
       }
@@ -34,8 +39,10 @@ function Login(props: { setUser: React.Dispatch<React.SetStateAction<Obj>> }) {
       try {
         const token = await LoginWithName(data);
         const url = `/home?token=${encodeURIComponent(token.token)}`;
-        props.setUser(token.user);
         navigate(url);
+
+        const img = token.user.avatar;
+        props.setAvatar({ avatar: img });
       } catch (error) {
         setErrorMessage((error as { message: string }).message);
       }
