@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
-import { GetMovies, Shearch } from "../..";
-import { MovieItem } from "../Home";
+import { Shearch } from "../..";
+import { avatar } from "../../types";
+import BookmarkedMovies from "./bookmarkedmovies";
 
-function Movies(props: {
-  handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+function BookMarked(props: { 
+    avatar: avatar; 
+    movies: any 
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [movies, setMovies] = useState<any>([]);
+
   const [count, setCount] = useState<number>(0);
   const [newData, setNewData] = useState<any>([]);
   const [inpitValue, setInputValue] = useState<string>("");
+  const [bookMovies, setBookMovies] = useState<any>([]);
 
   const input = (event: any) => {
     const inputString = event.target.value;
     setInputValue(inputString);
     const inputLowerCase = inputString.toLowerCase();
-    let filteredFilms = movies.filter((film: any) =>
+    let filteredFilms = bookMovies.filter((film: any) =>
       film.title.toLowerCase().includes(inputLowerCase.toLowerCase())
     );
     if (event.target.value === "") {
@@ -31,12 +34,12 @@ function Movies(props: {
     };
 
     window.addEventListener("resize", handleResize);
-    const fetchData = async () => {
-      const data = await GetMovies();
-      setMovies(data);
-    };
 
-    fetchData();
+        const filteredMovies = props.movies.filter((movie: any) =>
+          props.avatar.moviestitle.includes(movie.title)
+        );
+        setBookMovies(filteredMovies);
+  
   }, []);
 
   return (
@@ -47,7 +50,7 @@ function Movies(props: {
           onInput={input}
           type="text"
           className="outfit xl:h-10 caret-Red pl-1 bg-DarkBlue outline-none text-white text-[16px] w-[90%] md:text-[24px] xl:cursor-pointer xl:hover:border-b-[1px] xl:hover:border-[#5A698F]  "
-          placeholder="Search for movies"
+          placeholder="Search for bookmarked shows"
         />
       </div>
       {count === 0 && inpitValue !== "" ? (
@@ -61,10 +64,9 @@ function Movies(props: {
           </h1>
           {newData.map((movie: any) => {
             return (
-              <MovieItem
+              <BookmarkedMovies
                 movie={movie}
                 windowWidth={windowWidth}
-                handleClick={props.handleClick}
                 key={movie.title}
               />
             );
@@ -73,15 +75,28 @@ function Movies(props: {
       ) : (
         <>
           <h1 className="outfit  font-[300] text-white text-[20px] w-[90%] md:text-[32px]">
-            Movies
+            Bookmarked Movies
           </h1>
           <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-center xl:justify-start mt-6">
-            {movies.map((movie: any) => {
-              return (
-                <MovieItem
+            {bookMovies.map((movie: any) => {
+              return movie.category === 'Movie' && (
+                <BookmarkedMovies
                   movie={movie}
                   windowWidth={windowWidth}
-                  handleClick={props.handleClick}
+                  key={movie.title}
+                />
+              );
+            })}
+          </div>
+          <h1 className="outfit  font-[300] text-white text-[20px] w-[90%] md:text-[32px] xl:mt-10">
+          Bookmarked TV Series          
+          </h1>
+          <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-center xl:justify-start mt-6">
+            {bookMovies.map((movie: any) => {
+              return movie.category === 'TV Series' && (
+                <BookmarkedMovies
+                  movie={movie}
+                  windowWidth={windowWidth}
                   key={movie.title}
                 />
               );
@@ -92,4 +107,4 @@ function Movies(props: {
     </div>
   );
 }
-export default Movies;
+export default BookMarked;

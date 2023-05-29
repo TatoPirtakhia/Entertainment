@@ -20,5 +20,7 @@ export type Recovery = {
 
 
 export type avatar = {
+  name: string
   avatar: string;
+  moviestitle: string[]
 };

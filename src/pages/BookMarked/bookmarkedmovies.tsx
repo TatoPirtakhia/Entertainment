@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { CategoryMovie, CategoryTv, Play } from "../..";
 
-function MovieItem(props: {
-  movie: any;
-  windowWidth: number;
-  handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
-}) {
-  const [isHovered, setIsHovered] = useState<boolean>(false);
-  const [isClicked, setIsClicked] = useState<boolean>(false);
+function BookmarkedMovies(props: { movie: any; windowWidth: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   const [isHoveredMovies, setIsHoveredMovies] = useState(false);
 
   const handleMouseEnter = () => {
@@ -25,10 +21,7 @@ function MovieItem(props: {
   const handleMouseLeaveMovies = () => {
     setIsHoveredMovies(false);
   };
-  const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    props.handleClick(event);
-    setIsClicked(!isClicked);
-  };
+
   return (
     <div
       onMouseEnter={handleMouseEnterMovies}
@@ -40,26 +33,14 @@ function MovieItem(props: {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         id={props.movie.title}
-        onClick={onClick}
         className="absolute cursor-pointer xl:hover:bg-white top-2 left-[124px] md:left-[172px] md:top-4 xl:left-[232px] z-20 w-8 h-8 bg bg-DarkBlue bg-opacity-50 rounded-[50%] flex justify-center items-center "
       >
-        {props.movie.isBookmarked ? (
-          <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M10.61 0c.14 0 .273.028.4.083a1.03 1.03 0 0 1 .657.953v11.928a1.03 1.03 0 0 1-.656.953c-.116.05-.25.074-.402.074-.291 0-.543-.099-.756-.296L5.833 9.77l-4.02 3.924c-.218.203-.47.305-.756.305a.995.995 0 0 1-.4-.083A1.03 1.03 0 0 1 0 12.964V1.036A1.03 1.03 0 0 1 .656.083.995.995 0 0 1 1.057 0h9.552Z"
-              fill={isClicked ? "#000" : "#FFF"}
-            />
-          </svg>
-        ) : (
-          <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z"
-              stroke={isHovered ? "#000" : "#FFF"}
-              strokeWidth="1.5"
-              fill={isClicked ? "#FFF" : "none"}
-            />
-          </svg>
-        )}
+        <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10.61 0c.14 0 .273.028.4.083a1.03 1.03 0 0 1 .657.953v11.928a1.03 1.03 0 0 1-.656.953c-.116.05-.25.074-.402.074-.291 0-.543-.099-.756-.296L5.833 9.77l-4.02 3.924c-.218.203-.47.305-.756.305a.995.995 0 0 1-.4-.083A1.03 1.03 0 0 1 0 12.964V1.036A1.03 1.03 0 0 1 .656.083.995.995 0 0 1 1.057 0h9.552Z"
+            fill={isHovered?"#000":"#FFF"}
+          />
+        </svg>
       </div>
       <img
         src={
@@ -107,4 +88,4 @@ function MovieItem(props: {
   );
 }
 
-export default MovieItem;
+export default BookmarkedMovies;

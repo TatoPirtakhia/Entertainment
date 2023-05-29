@@ -4,7 +4,9 @@ import { Shearch } from "../..";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-function Home() {
+function Home(props:{
+  handleClick: (event: React.MouseEvent<HTMLDivElement>) => void
+}) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [data, setData] = useState<any>([]);
   const [originlData, setOriginalData] = useState<any>([]);
@@ -76,6 +78,7 @@ function Home() {
               <MovieItem
                 movie={movie}
                 windowWidth={windowWidth}
+                handleClick={props.handleClick}
                 key={movie.title}
               />
             );
@@ -111,6 +114,7 @@ function Home() {
                 !movie.isTrending && (
                   <MovieItem
                     movie={movie}
+                    handleClick={props.handleClick}
                     windowWidth={windowWidth}
                     key={movie.title}
                   />

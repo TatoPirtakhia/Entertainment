@@ -3,7 +3,9 @@ import { Shearch } from "../..";
 import { getTvSeries } from ".";
 import { MovieItem } from "../Home";
 
-function TvSeries() {
+function TvSeries(props:{
+  handleClick: (event: React.MouseEvent<HTMLDivElement>) => void
+}) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const [tvSeries, setTvSeries] = useState<any>([]);
@@ -65,6 +67,7 @@ function TvSeries() {
                 movie={movie}
                 windowWidth={windowWidth}
                 key={movie.title}
+                handleClick={props.handleClick}
               />
             );
           })}
@@ -79,6 +82,7 @@ function TvSeries() {
               return (
                 <MovieItem
                   movie={movie}
+                  handleClick={props.handleClick}
                   windowWidth={windowWidth}
                   key={movie.title}
                 />

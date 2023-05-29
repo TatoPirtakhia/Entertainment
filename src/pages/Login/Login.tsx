@@ -8,6 +8,7 @@ import LoginWithName from "./LoginNameOrEmail/LoginWithName";
 import { useState } from "react";
 import { Logo } from "../../assets";
 function Login(props: {
+  avatar: avatar
   setAvatar: React.Dispatch<React.SetStateAction<avatar>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -31,7 +32,9 @@ function Login(props: {
         const url = `/home?token=${encodeURIComponent(token.token)}`;
         navigate(url);
         const img = token.user.avatar;
-        props.setAvatar({ avatar: img });
+        const name = token.user.name
+        const movies = token.user.movititle
+        props.setAvatar({ avatar: img , name, moviestitle: movies });
       } catch (error) {
         setErrorMessage((error as { message: string }).message);
       }
@@ -42,7 +45,9 @@ function Login(props: {
         navigate(url);
 
         const img = token.user.avatar;
-        props.setAvatar({ avatar: img });
+        const name = token.user.name
+        const movies = token.user.movititle
+        props.setAvatar({ avatar: img , name, moviestitle: movies });
       } catch (error) {
         setErrorMessage((error as { message: string }).message);
       }

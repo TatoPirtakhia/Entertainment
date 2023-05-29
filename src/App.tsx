@@ -4,18 +4,24 @@ import { ForgotPassword, Login, RecoveryPassword } from "./pages/Login";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home/Home";
 import { Logo, Movies, NavBookmark, NavHome, NavMovies, NavTvSeries } from ".";
-import {  avatar } from "./types";
+import { avatar } from "./types";
 import { TvSeries } from "./pages/TvSeries";
+import BookMarked from "./pages/BookMarked/Bookmarked";
+import { GetAllMovies } from "./pages/Home";
+import setBookmark from "./pages/BookMarked/makeitBookmarked";
 
 function App() {
   const navigate = useNavigate();
+  const [movies, setMovies] = useState<any>([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [click, setClik] = useState<boolean>(false);
   const [token, setToken] = useState<boolean>(false);
   const [example, setExample] = useState<boolean>(false);
- 
+
   const [avatar, setAvatar] = useState<avatar>({
-    avatar:''
+    avatar: "",
+    name: "",
+    moviestitle: []
   });
   useEffect(() => {
     const handleResize = () => {
@@ -28,9 +34,13 @@ function App() {
       setAvatar(JSON.parse(data));
     }
     setExample(true);
+    const fetchData = async () => {
+      const data = await GetAllMovies();
+      setMovies(data);
+    };
+
+    fetchData();
   }, []);
-
-
 
   useEffect(() => {
     if (example) {
@@ -86,11 +96,23 @@ function App() {
   const handleMouseLeaveBook = () => {
     setIsHoveredBookmark(false);
   };
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const clickedSvg = event.currentTarget.id;
+    const name = avatar.name
+    if (clickedSvg && name ) {
+      setBookmark({clickedSvg,name});
+    }
+  };
+
   return (
     <div className="w-full h-full ">
       <nav
         className={`${
-          path === "/home" || path === "/movies" || path === "/tvSeries"
+          path === "/home" ||
+          path === "/movies" ||
+          path === "/tvSeries" ||
+          path === "/bookmarked"
             ? ""
             : "hidden"
         } 
@@ -127,7 +149,11 @@ function App() {
               }
             }}
           >
-            <NavHome path={path} isHoveredHome={isHoveredHome} windowWidth={windowWidth} />
+            <NavHome
+              path={path}
+              isHoveredHome={isHoveredHome}
+              windowWidth={windowWidth}
+            />
           </div>
           <div
             onMouseEnter={handleMouseEnterMovie}
@@ -143,7 +169,11 @@ function App() {
               }
             }}
           >
-            <NavMovies path={path} isHoveredMovie={isHoveredMovie} windowWidth={windowWidth} />
+            <NavMovies
+              path={path}
+              isHoveredMovie={isHoveredMovie}
+              windowWidth={windowWidth}
+            />
           </div>
           <div
             onMouseEnter={handleMouseEnterTv}
@@ -159,19 +189,34 @@ function App() {
               }
             }}
           >
-            <NavTvSeries path={path} isHoveredTv={isHoveredTv} windowWidth={windowWidth} />
+            <NavTvSeries
+              path={path}
+              isHoveredTv={isHoveredTv}
+              windowWidth={windowWidth}
+            />
           </div>
           {!token ? (
             ""
           ) : (
             <div
-            onMouseEnter={handleMouseEnterBook}
-            onMouseLeave={handleMouseLeaveBook}
+              onMouseEnter={handleMouseEnterBook}
+              onMouseLeave={handleMouseLeaveBook}
               onClick={() => {
-                navigate("/");
+                const url = window.location.href;
+                const parsedUrl = new URL(url);
+                const token = parsedUrl.searchParams.get("token");
+                if (token !== null) {
+                  navigate(`/bookmarked?token=${encodeURIComponent(token)}`);
+                } else {
+                  navigate("/bookmarked");
+                }
               }}
             >
-              <NavBookmark path={path}  isHoveredBookmark={isHoveredBookmark} windowWidth={windowWidth}/>
+              <NavBookmark
+                path={path}
+                isHoveredBookmark={isHoveredBookmark}
+                windowWidth={windowWidth}
+              />
             </div>
           )}
         </div>
@@ -199,42 +244,48 @@ function App() {
           </div>
         ) : (
           <div className="relative w-[40px] xl:mt-[550px]">
-          <img
-            src={avatar.avatar}
-            alt=""
-            className="w-6 h-6 md:h-[40px] md:w-[40px] rounded-[50%] "
-            onClick={() => {
-              setClik(!click);
-            }}
-          />
-           <button
-          onClick={() => {
-            navigate("/home");
-            setClik(!click);
-            setToken(false);
-            setAvatar({avatar:''})
-          }}
-          className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[30px] right-1 md:right-0 md:top-[50px] xl:top-[-40px] xl:left-[-7px] xl:hover:text-Red ${
-            click ? "" : "hidden"
-          } `}
-        >
-          Log out
-        </button>
+            <img
+              src={avatar.avatar}
+              alt=""
+              className="w-6 h-6 md:h-[40px] md:w-[40px] rounded-[50%] "
+              onClick={() => {
+                setClik(!click);
+              }}
+            />
+            <button
+              onClick={() => {
+                navigate("/home");
+                setClik(!click);
+                setToken(false);
+                setAvatar({ avatar: "", name: "" ,moviestitle:[] });
+              }}
+              className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[30px] right-1 md:right-0 md:top-[50px] xl:top-[-40px] xl:left-[-7px] xl:hover:text-Red ${
+                click ? "" : "hidden"
+              } `}
+            >
+              Log out
+            </button>
           </div>
         )}
-       
       </nav>
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/login" element={<Login  setAvatar={setAvatar} />} />
+        <Route path="/login" element={<Login setAvatar={setAvatar} avatar={avatar} />} />
         <Route path="/VerifyAccount" element={<VerifiAccount />} />
         <Route path="/succesfullyCreated" element={<SendEmail />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/RecoveryPassword" element={<RecoveryPassword />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/tvSeries" element={<TvSeries />} />
+        <Route path="/home" element={<Home handleClick={handleClick} />} />
+        <Route path="/movies" element={<Movies handleClick={handleClick} />} />
+        <Route
+          path="/tvSeries"
+          element={<TvSeries handleClick={handleClick} />}
+        />
+        <Route
+          path="/bookmarked"
+          element={<BookMarked avatar={avatar} movies={movies} />}
+        />
       </Routes>
     </div>
   );
