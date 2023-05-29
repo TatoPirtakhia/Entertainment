@@ -4,7 +4,7 @@ const setBookmark = async (data: any) => {
   console.log(data);
   try {
     const response = await axios.post(
-      "http://localhost:3005/api/BookMark",
+      "https://movies-doxx.onrender.com/api/BookMark",
       { 
          title: data.clickedSvg,
          name: data.name 

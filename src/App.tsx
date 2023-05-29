@@ -101,6 +101,7 @@ function App() {
     const clickedSvg = event.currentTarget.id;
     const name = avatar.name
     if (clickedSvg && name ) {
+      setAvatar({...avatar,moviestitle: [...avatar.moviestitle, clickedSvg],})
       setBookmark({clickedSvg,name});
     }
   };
