@@ -4,8 +4,10 @@ import { Shearch } from "../..";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { avatar } from "../../types";
 function Home(props:{
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void
+  avatar: avatar
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [data, setData] = useState<any>([]);
@@ -80,6 +82,7 @@ function Home(props:{
                 windowWidth={windowWidth}
                 handleClick={props.handleClick}
                 key={movie.title}
+                avatar={props.avatar}
               />
             );
           })}
@@ -99,6 +102,7 @@ function Home(props:{
                       windowWidth={windowWidth}
                       handleClick={props.handleClick}
                       key={movie.title}
+                      
                     />
                   ) : (
                     ""
@@ -118,6 +122,7 @@ function Home(props:{
                     handleClick={props.handleClick}
                     windowWidth={windowWidth}
                     key={movie.title}
+                    avatar={props.avatar}
                   />
                 )
               );

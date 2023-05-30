@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Shearch } from "../..";
 import { getTvSeries } from ".";
 import { MovieItem } from "../Home";
+import { avatar } from "../../types";
 
 function TvSeries(props:{
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void
+  avatar: avatar
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -68,6 +70,7 @@ function TvSeries(props:{
                 windowWidth={windowWidth}
                 key={movie.title}
                 handleClick={props.handleClick}
+                avatar={props.avatar}
               />
             );
           })}
@@ -85,6 +88,7 @@ function TvSeries(props:{
                   handleClick={props.handleClick}
                   windowWidth={windowWidth}
                   key={movie.title}
+                  avatar={props.avatar}
                 />
               );
             })}

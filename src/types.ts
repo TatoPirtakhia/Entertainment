@@ -23,4 +23,5 @@ export type avatar = {
   name: string
   avatar: string;
   moviestitle: string[]
+  token:string
 };

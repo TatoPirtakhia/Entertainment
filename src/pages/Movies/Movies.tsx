@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { GetMovies, Shearch } from "../..";
 import { MovieItem } from "../Home";
+import { avatar } from "../../types";
 
 function Movies(props: {
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  avatar: avatar
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [movies, setMovies] = useState<any>([]);
@@ -66,6 +68,7 @@ function Movies(props: {
                 windowWidth={windowWidth}
                 handleClick={props.handleClick}
                 key={movie.title}
+                avatar={props.avatar}
               />
             );
           })}
@@ -83,6 +86,7 @@ function Movies(props: {
                   windowWidth={windowWidth}
                   handleClick={props.handleClick}
                   key={movie.title}
+                  avatar={props.avatar}
                 />
               );
             })}

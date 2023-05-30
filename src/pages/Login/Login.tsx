@@ -28,26 +28,25 @@ function Login(props: {
   const onSubmit: SubmitHandler<login> = async (data) => {
     if (isEmail(data.nameOrEmail)) {
       try {
-        const token = await LoginWithEmail(data);
-        const url = `/home?token=${encodeURIComponent(token.token)}`;
-        navigate(url);
-        const img = token.user.avatar;
-        const name = token.user.name
-        const movies = token.user.movititle
-        props.setAvatar({ avatar: img , name, moviestitle: movies });
+        const user = await LoginWithEmail(data);
+        navigate('/home');
+        const img = user.user.avatar;
+        const name = user.user.name
+        const movies = user.user.movititle
+        const token =  user.token
+        props.setAvatar({ avatar: img , name, moviestitle: movies ,token:token});
       } catch (error) {
         setErrorMessage((error as { message: string }).message);
       }
     } else {
       try {
-        const token = await LoginWithName(data);
-        const url = `/home?token=${encodeURIComponent(token.token)}`;
-        navigate(url);
-
-        const img = token.user.avatar;
-        const name = token.user.name
-        const movies = token.user.movititle
-        props.setAvatar({ avatar: img , name, moviestitle: movies });
+        const user = await LoginWithName(data);
+        navigate('/home');
+        const img = user.user.avatar;
+        const name = user.user.name
+        const movies = user.user.movititle
+        const token =  user.token
+        props.setAvatar({ avatar: img , name, moviestitle: movies ,token:token});
       } catch (error) {
         setErrorMessage((error as { message: string }).message);
       }

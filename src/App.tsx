@@ -15,13 +15,13 @@ function App() {
   const [movies, setMovies] = useState<any>([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [click, setClik] = useState<boolean>(false);
-  const [token, setToken] = useState<boolean>(false);
   const [example, setExample] = useState<boolean>(false);
 
   const [avatar, setAvatar] = useState<avatar>({
     avatar: "",
     name: "",
     moviestitle: [],
+    token: "",
   });
   useEffect(() => {
     const handleResize = () => {
@@ -53,13 +53,6 @@ function App() {
   useEffect(() => {
     setPath(window.location.pathname);
     setClik(false);
-    const url = window.location.href;
-    const parsedUrl = new URL(url);
-    const Token = parsedUrl.searchParams.get("token");
-
-    if (Token) {
-      setToken(true);
-    }
   }, [window.location.pathname]);
   const [isHoveredHome, setIsHoveredHome] = useState(false);
   const [isHoveredMovie, setIsHoveredMovie] = useState(false);
@@ -100,6 +93,7 @@ function App() {
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const clickedSvg = event.currentTarget.id;
     const name = avatar.name;
+    const token = avatar.token
     if (clickedSvg && name) {
       const movieIndex = avatar.moviestitle.indexOf(clickedSvg);
 
@@ -113,7 +107,7 @@ function App() {
           moviestitle: [...avatar.moviestitle, clickedSvg],
         });
       }
-      setBookmark({ clickedSvg, name });
+      setBookmark({ clickedSvg, name ,token});
     }
   };
 
@@ -134,14 +128,7 @@ function App() {
       >
         <div
           onClick={() => {
-            const url = window.location.href;
-            const parsedUrl = new URL(url);
-            const token = parsedUrl.searchParams.get("token");
-            if (token !== null) {
-              navigate(`/home?token=${encodeURIComponent(token)}`);
-            } else {
-              navigate("/home");
-            }
+            navigate("/home");
           }}
         >
           <Logo />
@@ -151,14 +138,7 @@ function App() {
             onMouseEnter={handleMouseEnterHome}
             onMouseLeave={handleMouseLeaveHome}
             onClick={() => {
-              const url = window.location.href;
-              const parsedUrl = new URL(url);
-              const token = parsedUrl.searchParams.get("token");
-              if (token !== null) {
-                navigate(`/home?token=${encodeURIComponent(token)}`);
-              } else {
-                navigate("/home");
-              }
+              navigate("/home");
             }}
           >
             <NavHome
@@ -171,14 +151,7 @@ function App() {
             onMouseEnter={handleMouseEnterMovie}
             onMouseLeave={handleMouseLeaveMovie}
             onClick={() => {
-              const url = window.location.href;
-              const parsedUrl = new URL(url);
-              const token = parsedUrl.searchParams.get("token");
-              if (token !== null) {
-                navigate(`/movies?token=${encodeURIComponent(token)}`);
-              } else {
-                navigate("/movies");
-              }
+              navigate("/movies");
             }}
           >
             <NavMovies
@@ -191,14 +164,7 @@ function App() {
             onMouseEnter={handleMouseEnterTv}
             onMouseLeave={handleMouseLeaveTv}
             onClick={() => {
-              const url = window.location.href;
-              const parsedUrl = new URL(url);
-              const token = parsedUrl.searchParams.get("token");
-              if (token !== null) {
-                navigate(`/tvSeries?token=${encodeURIComponent(token)}`);
-              } else {
-                navigate("/tvSeries");
-              }
+              navigate("/tvSeries");
             }}
           >
             <NavTvSeries
@@ -207,21 +173,14 @@ function App() {
               windowWidth={windowWidth}
             />
           </div>
-          {!token ? (
+          {!avatar.token ? (
             ""
           ) : (
             <div
               onMouseEnter={handleMouseEnterBook}
               onMouseLeave={handleMouseLeaveBook}
               onClick={() => {
-                const url = window.location.href;
-                const parsedUrl = new URL(url);
-                const token = parsedUrl.searchParams.get("token");
-                if (token !== null) {
-                  navigate(`/bookmarked?token=${encodeURIComponent(token)}`);
-                } else {
-                  navigate("/bookmarked");
-                }
+                navigate("/bookmarked");
               }}
             >
               <NavBookmark
@@ -232,7 +191,7 @@ function App() {
             </div>
           )}
         </div>
-        {!token ? (
+        {!avatar.token ? (
           <div className="xl:mt-[500px] flex  xl:flex-col xl:items-center ">
             <button
               onClick={() => {
@@ -266,11 +225,10 @@ function App() {
             />
             <button
               onClick={() => {
-             
                 setClik(!click);
-                setToken(false);
-                setAvatar({ avatar: "", name: "", moviestitle: [] });
+                setAvatar({ avatar: "", name: "", moviestitle: [], token: "" });
                 navigate("/home");
+                
               }}
               className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[30px] right-1 md:right-0 md:top-[50px] xl:top-[-40px] xl:left-[-7px] xl:hover:text-Red ${
                 click ? "" : "hidden"
@@ -292,15 +250,21 @@ function App() {
         <Route path="/succesfullyCreated" element={<SendEmail />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/RecoveryPassword" element={<RecoveryPassword />} />
-        <Route path="/home" element={<Home handleClick={handleClick}  />} />
-        <Route path="/movies" element={<Movies handleClick={handleClick} />} />
+        <Route path="/home" element={<Home handleClick={handleClick} avatar={avatar} />} />
+        <Route path="/movies" element={<Movies handleClick={handleClick} avatar={avatar}/>} />
         <Route
           path="/tvSeries"
-          element={<TvSeries handleClick={handleClick} />}
+          element={<TvSeries handleClick={handleClick} avatar={avatar}/>}
         />
         <Route
           path="/bookmarked"
-          element={<BookMarked avatar={avatar} movies={movies} handleClick={handleClick} />}
+          element={
+            <BookMarked
+              avatar={avatar}
+              movies={movies}
+              handleClick={handleClick}
+            />
+          }
         />
       </Routes>
     </div>
