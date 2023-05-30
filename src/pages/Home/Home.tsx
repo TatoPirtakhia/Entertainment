@@ -97,6 +97,7 @@ function Home(props:{
                     <TrendingMovieItem
                       movie={movie}
                       windowWidth={windowWidth}
+                      handleClick={props.handleClick}
                       key={movie.title}
                     />
                   ) : (

@@ -21,7 +21,7 @@ function App() {
   const [avatar, setAvatar] = useState<avatar>({
     avatar: "",
     name: "",
-    moviestitle: []
+    moviestitle: [],
   });
   useEffect(() => {
     const handleResize = () => {
@@ -99,10 +99,21 @@ function App() {
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const clickedSvg = event.currentTarget.id;
-    const name = avatar.name
-    if (clickedSvg && name ) {
-      setAvatar({...avatar,moviestitle: [...avatar.moviestitle, clickedSvg],})
-      setBookmark({clickedSvg,name});
+    const name = avatar.name;
+    if (clickedSvg && name) {
+      const movieIndex = avatar.moviestitle.indexOf(clickedSvg);
+
+      if (movieIndex !== -1) {
+        const updatedMoviestitle = [...avatar.moviestitle];
+        updatedMoviestitle.splice(movieIndex, 1);
+        setAvatar({ ...avatar, moviestitle: updatedMoviestitle });
+      } else {
+        setAvatar({
+          ...avatar,
+          moviestitle: [...avatar.moviestitle, clickedSvg],
+        });
+      }
+      setBookmark({ clickedSvg, name });
     }
   };
 
@@ -255,10 +266,11 @@ function App() {
             />
             <button
               onClick={() => {
-                navigate("/home");
+             
                 setClik(!click);
                 setToken(false);
-                setAvatar({ avatar: "", name: "" ,moviestitle:[] });
+                setAvatar({ avatar: "", name: "", moviestitle: [] });
+                navigate("/home");
               }}
               className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[30px] right-1 md:right-0 md:top-[50px] xl:top-[-40px] xl:left-[-7px] xl:hover:text-Red ${
                 click ? "" : "hidden"
@@ -272,12 +284,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/login" element={<Login setAvatar={setAvatar} avatar={avatar} />} />
+        <Route
+          path="/login"
+          element={<Login setAvatar={setAvatar} avatar={avatar} />}
+        />
         <Route path="/VerifyAccount" element={<VerifiAccount />} />
         <Route path="/succesfullyCreated" element={<SendEmail />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/RecoveryPassword" element={<RecoveryPassword />} />
-        <Route path="/home" element={<Home handleClick={handleClick} />} />
+        <Route path="/home" element={<Home handleClick={handleClick}  />} />
         <Route path="/movies" element={<Movies handleClick={handleClick} />} />
         <Route
           path="/tvSeries"
@@ -285,7 +300,7 @@ function App() {
         />
         <Route
           path="/bookmarked"
-          element={<BookMarked avatar={avatar} movies={movies} />}
+          element={<BookMarked avatar={avatar} movies={movies} handleClick={handleClick} />}
         />
       </Routes>
     </div>
