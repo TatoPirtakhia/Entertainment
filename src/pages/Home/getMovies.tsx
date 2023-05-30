@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { CategoryMovie, CategoryTv, Play } from "../..";
-import { avatar } from "../../types";
+import { MovieObj, avatar } from "../../types";
 
 function MovieItem(props: {
-  movie: any;
+  movie: MovieObj;
   windowWidth: number;
   avatar: avatar
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;

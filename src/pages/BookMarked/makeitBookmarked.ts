@@ -1,6 +1,7 @@
 import axios from "axios";
+import { BokkmarkSend } from "../../types";
 
-const setBookmark = async (data: any) => {
+const setBookmark = async (data: BokkmarkSend) => {
   
   try {
     const response = await axios.post(

@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
 import { GetMovies, Shearch } from "../..";
 import { MovieItem } from "../Home";
-import { avatar } from "../../types";
+import { MovieObj, avatar } from "../../types";
 
 function Movies(props: {
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
-  avatar: avatar
+  avatar: avatar;
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [movies, setMovies] = useState<any>([]);
+  const [movies, setMovies] = useState<MovieObj[]>([]);
   const [count, setCount] = useState<number>(0);
-  const [newData, setNewData] = useState<any>([]);
+  const [newData, setNewData] = useState<MovieObj[]>([]);
   const [inpitValue, setInputValue] = useState<string>("");
 
-  const input = (event: any) => {
+  const input = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputString = event.target.value;
     setInputValue(inputString);
     const inputLowerCase = inputString.toLowerCase();
-    let filteredFilms = movies.filter((film: any) =>
+    let filteredFilms = movies.filter((film: MovieObj) =>
       film.title.toLowerCase().includes(inputLowerCase.toLowerCase())
     );
     if (event.target.value === "") {
-      filteredFilms = "";
+      filteredFilms = [];
     }
     setNewData(filteredFilms);
     setCount(filteredFilms.length);
@@ -61,7 +61,7 @@ function Movies(props: {
           <h1 className="outfit mb-4 font-[300] text-white text-[20px] md:text-[32px] w-[90%] z-20">
             {`Found ${count} results for '${inpitValue}'`}
           </h1>
-          {newData.map((movie: any) => {
+          {newData.map((movie: MovieObj) => {
             return (
               <MovieItem
                 movie={movie}
@@ -79,7 +79,7 @@ function Movies(props: {
             Movies
           </h1>
           <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-center xl:justify-start mt-6">
-            {movies.map((movie: any) => {
+            {movies.map((movie: MovieObj) => {
               return (
                 <MovieItem
                   movie={movie}

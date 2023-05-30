@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { CategoryMovie, CategoryTv, Play } from "../..";
+import { MovieObj } from "../../types";
 
 function TrendingMovieItem(props: {
-  movie: any;
+  movie: MovieObj;
   windowWidth: number;
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }) {

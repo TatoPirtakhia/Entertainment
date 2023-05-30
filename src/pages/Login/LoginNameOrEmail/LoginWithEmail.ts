@@ -1,10 +1,11 @@
 
 import axios, { AxiosError } from "axios";
+import { loginEmail } from "../../../types";
 
-export const LoginWithEmail = async (data: any) => {
+export const LoginWithEmail = async (data: loginEmail) => {
   try {
     const response  = await axios.post("https://movies-doxx.onrender.com/api/login/email", {
-      email: data.nameOrEmail,
+      email: data.email,
       password: data.password,
     });
 

@@ -25,3 +25,49 @@ export type avatar = {
   moviestitle: string[]
   token:string
 };
+
+export type  MovieObj = {
+  title: string;
+  thumbnail: {
+    trending: {
+      small: string;
+      large: string;
+    };
+    regular: {
+      small: string;
+      medium: string;
+      large: string;
+    };
+  };
+  year: number;
+  category: string;
+  rating: string;
+  isBookmarked: boolean;
+  isTrending: boolean;
+}
+
+
+export type BokkmarkSend ={
+  name:string
+  token: string
+  clickedSvg:string
+}
+
+export type SendRecoveryPassword = {
+  password:string
+  repeatPassword:string
+  hash:string
+}
+export type SendInstructions = {
+  email: string
+  redirectLink:string
+}
+
+export type loginName = {
+  name: string
+  password: string
+}
+export type loginEmail = {
+  email: string
+  password: string
+}

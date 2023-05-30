@@ -28,7 +28,7 @@ function Login(props: {
   const onSubmit: SubmitHandler<login> = async (data) => {
     if (isEmail(data.nameOrEmail)) {
       try {
-        const user = await LoginWithEmail(data);
+        const user = await LoginWithEmail({email:data.nameOrEmail,password:data.password});
         navigate('/home');
         const img = user.user.avatar;
         const name = user.user.name
@@ -40,7 +40,7 @@ function Login(props: {
       }
     } else {
       try {
-        const user = await LoginWithName(data);
+        const user = await LoginWithName({name:data.nameOrEmail,password:data.password});
         navigate('/home');
         const img = user.user.avatar;
         const name = user.user.name

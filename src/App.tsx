@@ -4,7 +4,7 @@ import { ForgotPassword, Login, RecoveryPassword } from "./pages/Login";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home/Home";
 import { Logo, Movies, NavBookmark, NavHome, NavMovies, NavTvSeries } from ".";
-import { avatar } from "./types";
+import { MovieObj, avatar } from "./types";
 import { TvSeries } from "./pages/TvSeries";
 import BookMarked from "./pages/BookMarked/Bookmarked";
 import { GetAllMovies } from "./pages/Home";
@@ -12,7 +12,7 @@ import setBookmark from "./pages/BookMarked/makeitBookmarked";
 
 function App() {
   const navigate = useNavigate();
-  const [movies, setMovies] = useState<any>([]);
+  const [movies, setMovies] = useState<MovieObj[]>([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [click, setClik] = useState<boolean>(false);
   const [example, setExample] = useState<boolean>(false);

@@ -4,23 +4,23 @@ import { Shearch } from "../..";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { avatar } from "../../types";
+import { MovieObj, avatar } from "../../types";
 function Home(props:{
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void
   avatar: avatar
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [data, setData] = useState<any>([]);
-  const [originlData, setOriginalData] = useState<any>([]);
+  const [data, setData] = useState<MovieObj[]>([]);
+  const [originlData, setOriginalData] = useState<MovieObj[]>([]);
   const [count, setCount] = useState<number>(0);
-  const [newData, setNewData] = useState<any>([]);
+  const [newData, setNewData] = useState<MovieObj[]>([])
   const [inpitValue, setInputValue] = useState<string>("");
 
-  const input = (event: any) => {
+  const input = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputString = event.target.value;
     setInputValue(inputString);
     const inputLowerCase = inputString.toLowerCase();
-    let filteredFilms = originlData.filter((film: any) =>
+    let filteredFilms = originlData.filter((film: MovieObj) =>
       film.title.toLowerCase().includes(inputLowerCase.toLowerCase())
     );
     if (event.target.value === "") {
@@ -75,7 +75,7 @@ function Home(props:{
           <h1 className="outfit mb-4 font-[300] text-white text-[20px] md:text-[32px] w-[95%] z-20">
             {`Found ${count} results for '${inpitValue}'`}
           </h1>
-          {newData.map((movie: any) => {
+          {newData.map((movie: MovieObj) => {
             return (
               <MovieItem
                 movie={movie}
@@ -95,7 +95,7 @@ function Home(props:{
           <div className="w-full ">
             <Slider {...settings}>
               {data &&
-                data.map((movie: any) => {
+                data.map((movie: MovieObj) => {
                   return movie.isTrending ? (
                     <TrendingMovieItem
                       movie={movie}
@@ -114,7 +114,7 @@ function Home(props:{
             Recommended for you
           </h1>
           <div className="flex flex-wrap gap-4 md:gap-[30px] xd:gap-10 xl:w-full w-[95%] justify-center  xl:justify-start mt-6">
-            {data.map((movie: any) => {
+            {data.map((movie: MovieObj) => {
               return (
                 !movie.isTrending && (
                   <MovieItem

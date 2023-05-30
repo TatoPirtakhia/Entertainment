@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
 import { Shearch } from "../..";
-import { avatar } from "../../types";
+import { MovieObj, avatar } from "../../types";
 import BookmarkedMovies from "./bookmarkedmovies";
 
 function BookMarked(props: {
   avatar: avatar;
-  movies: any;
+  movies: MovieObj[];
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const [count, setCount] = useState<number>(0);
-  const [newData, setNewData] = useState<any>([]);
+  const [newData, setNewData] = useState<MovieObj[]>([]);
   const [inpitValue, setInputValue] = useState<string>("");
-  const [bookMovies, setBookMovies] = useState<any>([]);
+  const [bookMovies, setBookMovies] = useState<MovieObj[]>([]);
 
   const [bookmarkClick, setBookmarkClick] = useState<boolean>(false);
 
-  const input = (event: any) => {
+  const input = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputString = event.target.value;
     setInputValue(inputString);
     const inputLowerCase = inputString.toLowerCase();
-    let filteredFilms = bookMovies.filter((film: any) =>
+    let filteredFilms = bookMovies.filter((film: MovieObj) =>
       film.title.toLowerCase().includes(inputLowerCase.toLowerCase())
     );
     if (event.target.value === "") {
-      filteredFilms = "";
+      filteredFilms = [];
     }
     setNewData(filteredFilms);
     setCount(filteredFilms.length);
@@ -38,7 +38,7 @@ function BookMarked(props: {
 
     window.addEventListener("resize", handleResize);
 
-    const filteredMovies = props.movies.filter((movie: any) =>
+    const filteredMovies = props.movies.filter((movie: MovieObj) =>
       props.avatar.moviestitle.includes(movie.title)
     );
     setBookMovies(filteredMovies);
@@ -64,7 +64,7 @@ function BookMarked(props: {
           <h1 className="outfit mb-4 font-[300] text-white text-[20px] md:text-[32px] w-[90%] z-20">
             {`Found ${count} results for '${inpitValue}'`}
           </h1>
-          {newData.map((movie: any) => {
+          {newData.map((movie: MovieObj) => {
             return (
               <BookmarkedMovies
                 movie={movie}
@@ -83,7 +83,7 @@ function BookMarked(props: {
             Bookmarked Movies
           </h1>
           <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-center xl:justify-start mt-6">
-            {bookMovies.map((movie: any) => {
+            {bookMovies.map((movie: MovieObj) => {
               return (
                 movie.category === "Movie" && (
                   <BookmarkedMovies
@@ -102,7 +102,7 @@ function BookMarked(props: {
             Bookmarked TV Series
           </h1>
           <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-center xl:justify-start mt-6">
-            {bookMovies.map((movie: any) => {
+            {bookMovies.map((movie: MovieObj) => {
               return (
                 movie.category === "TV Series" && (
                   <BookmarkedMovies

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { BookMarkFull, CategoryMovie, CategoryTv, Play } from "../..";
+import { MovieObj } from "../../types";
 
 function BookmarkedMovies(props: {
-  movie: any;
+  movie: MovieObj;
   windowWidth: number;
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
   setBookmarkClick: React.Dispatch<React.SetStateAction<boolean>>;
