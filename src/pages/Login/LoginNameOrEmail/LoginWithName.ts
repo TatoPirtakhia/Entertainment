@@ -3,7 +3,7 @@ import { loginName } from "../../../types";
 
 const LoginWithName = async (data: loginName) => {
   try {
-    const response = await axios.post("https://movies-doxx.onrender.com/api/login/name", {
+    const response = await axios.post("https://entertainment-api-production.up.railway.app/api/login/name", {
       name: data.name,
       password: data.password,
     });

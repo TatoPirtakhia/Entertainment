@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 
 const sendRegistrationRequest = async (data: FormData): Promise<any> => {
   try {
-    await axios.post("https://movies-doxx.onrender.com/api/register", data);
+    await axios.post("https://entertainment-api-production.up.railway.app/api/register", data);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError;

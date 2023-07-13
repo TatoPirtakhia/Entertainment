@@ -4,7 +4,7 @@ import { loginEmail } from "../../../types";
 
 export const LoginWithEmail = async (data: loginEmail) => {
   try {
-    const response  = await axios.post("https://movies-doxx.onrender.com/api/login/email", {
+    const response  = await axios.post("https://entertainment-api-production.up.railway.app/api/login/email", {
       email: data.email,
       password: data.password,
     });

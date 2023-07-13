@@ -3,7 +3,7 @@ import axios from "axios";
 const GetMovies = async () => {
   try {
     const response = await axios.get(
-      "https://movies-doxx.onrender.com/api/Movies"
+      "https://entertainment-api-production.up.railway.app/api/Movies"
     );
     return response.data;
   } catch (error) {
