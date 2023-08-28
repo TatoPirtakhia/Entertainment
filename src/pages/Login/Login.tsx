@@ -119,7 +119,7 @@ function Login(props: {
         </button>
         <p className="w-[90%] text-center text-white outfit text-[15px] font-[300] mb-6">
           Don't have an account?{" "}
-          <span className="text-Red ml-2  " onClick={goToRegistration}>
+          <span className="text-Red ml-2  cursor-pointer" onClick={goToRegistration}>
             Sign Up
           </span>
         </p>

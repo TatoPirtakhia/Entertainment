@@ -148,7 +148,7 @@ function Registration() {
         </form>
 
         <div className="relative mb-6">
-          <input type="file" ref={imageRef} name="avatar" />
+          <input type="file" ref={imageRef} name="avatar"  className="text-white" />
           {selectedImage ? (
             ""
           ) : (
@@ -166,7 +166,10 @@ function Registration() {
         </button>
         <p className="w-[90%] text-center text-white outfit text-[15px] font-[300] mb-6">
           Alread have an account?{" "}
-          <span className="text-Red ml-2  " onClick={goToLoginPage}>
+          <span
+            className="text-Red ml-2 cursor-pointer  "
+            onClick={goToLoginPage}
+          >
             Login
           </span>
         </p>
