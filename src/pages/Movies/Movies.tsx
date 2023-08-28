@@ -78,7 +78,7 @@ function Movies(props: {
           <h1 className="outfit  font-[300] text-white text-[20px] w-[90%] md:text-[32px]">
             Movies
           </h1>
-          <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-center xl:justify-start mt-6">
+          <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-center  mt-6">
             {movies.map((movie: MovieObj) => {
               return (
                 <MovieItem

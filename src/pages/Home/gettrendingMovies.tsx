@@ -46,7 +46,7 @@ function TrendingMovieItem(props: {
       onMouseEnter={handleMouseEnterMovies}
       onMouseLeave={handleMouseLeaveMovies}
       key={props.movie.title}
-      className="rounded-[8px] relative cursor-pointer h-[140px] md:h-[230px]"
+      className="rounded-[8px] relative cursor-pointer h-[140px] md:h-[230px] mr-5"
       style={{ width: props.windowWidth >= 768 ? "470px" : "240px" }}
     >
       <div

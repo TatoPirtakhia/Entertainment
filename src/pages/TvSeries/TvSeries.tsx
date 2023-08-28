@@ -80,7 +80,7 @@ function TvSeries(props:{
           <h1 className="outfit  font-[300] text-white text-[20px] md:text-[32px] w-[90%]">
             TV Series
           </h1>
-          <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-center xl:justify-start mt-6">
+          <div className="flex flex-wrap gap-4 md:gap-8 w-[95%] xl:w-full justify-center mt-6">
             {tvSeries.map((movie: any) => {
               return (
                 <MovieItem

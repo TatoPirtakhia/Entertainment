@@ -11,16 +11,16 @@ function Home(props:{
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [data, setData] = useState<MovieObj[]>([]);
-  const [originlData, setOriginalData] = useState<MovieObj[]>([]);
+  const [originalData, setOriginalData] = useState<MovieObj[]>([]);
   const [count, setCount] = useState<number>(0);
   const [newData, setNewData] = useState<MovieObj[]>([])
-  const [inpitValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>("");
 
   const input = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputString = event.target.value;
     setInputValue(inputString);
     const inputLowerCase = inputString.toLowerCase();
-    let filteredFilms = originlData.filter((film: MovieObj) =>
+    let filteredFilms = originalData.filter((film: MovieObj) =>
       film.title.toLowerCase().includes(inputLowerCase.toLowerCase())
     );
     if (event.target.value === "") {
@@ -66,14 +66,14 @@ function Home(props:{
           placeholder="Search for movies or TV series"
         />
       </div>
-      {count === 0 && inpitValue !== "" ? (
+      {count === 0 && inputValue !== "" ? (
         <h1 className="outfit mb-4 font-[300] text-white text-[20px] md:text-[32px] w-[95%] z-20">
-          {`Found ${count} results for '${inpitValue}'`}
+          {`Found ${count} results for '${inputValue}'`}
         </h1>
       ) : count > 0 ? (
         <div className="flex flex-wrap gap-4 w-full justify-center    xl:justify-start ">
           <h1 className="outfit mb-4 font-[300] text-white text-[20px] md:text-[32px] w-[95%] z-20">
-            {`Found ${count} results for '${inpitValue}'`}
+            {`Found ${count} results for '${inputValue}'`}
           </h1>
           {newData.map((movie: MovieObj) => {
             return (
@@ -113,7 +113,7 @@ function Home(props:{
           <h1 className="outfit font-[300] text-white text-xl w-[90%] mt-6 md:text-[32px] ">
             Recommended for you
           </h1>
-          <div className="flex flex-wrap gap-4 md:gap-[30px] xd:gap-10 xl:w-full w-[95%] justify-center  xl:justify-start mt-6">
+          <div className="flex flex-wrap gap-4 md:gap-10 xd:gap-10 xl:w-full w-[95%] justify-center   mt-6">
             {data.map((movie: MovieObj) => {
               return (
                 !movie.isTrending && (

@@ -93,7 +93,7 @@ function App() {
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const clickedSvg = event.currentTarget.id;
     const name = avatar.name;
-    const token = avatar.token
+    const token = avatar.token;
     if (clickedSvg && name) {
       const movieIndex = avatar.moviestitle.indexOf(clickedSvg);
 
@@ -107,7 +107,7 @@ function App() {
           moviestitle: [...avatar.moviestitle, clickedSvg],
         });
       }
-      setBookmark({ clickedSvg, name ,token});
+      setBookmark({ clickedSvg, name, token });
     }
   };
 
@@ -192,25 +192,20 @@ function App() {
           )}
         </div>
         {!avatar.token ? (
-          <div className="xl:mt-[500px] flex  xl:flex-col xl:items-center ">
-            <button
-              onClick={() => {
-                navigate("/login");
-              }}
-              className="outfit text-white font-medium text-[15px] md:text-[24px] opacity-70 xl:hover:text-Red"
-            >
-              Sign in
-            </button>
-            <p className="outfit text-white font-medium text-[15px] md:text-[24px]">
-              /
-            </p>
-            <button
-              onClick={() => {
-                navigate("/registration");
-              }}
-              className="outfit text-white font-medium text-[15px] md:text-[24px] opacity-70 xl:hover:text-Red"
-            >
-              Sign up
+          <div
+            className="xl:mt-[500px] flex  xl:flex-col xl:items-center "
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            <button className="Btn">
+              <div className="sign">
+                <svg viewBox="0 0 512 512">
+                  <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
+                </svg>
+              </div>
+
+              <div className="text">Login</div>
             </button>
           </div>
         ) : (
@@ -228,7 +223,6 @@ function App() {
                 setClik(!click);
                 setAvatar({ avatar: "", name: "", moviestitle: [], token: "" });
                 navigate("/home");
-                
               }}
               className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[30px] right-1 md:right-0 md:top-[50px] xl:top-[-40px] xl:left-[-7px] xl:hover:text-Red ${
                 click ? "" : "hidden"
@@ -250,11 +244,17 @@ function App() {
         <Route path="/succesfullyCreated" element={<SendEmail />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/RecoveryPassword" element={<RecoveryPassword />} />
-        <Route path="/home" element={<Home handleClick={handleClick} avatar={avatar} />} />
-        <Route path="/movies" element={<Movies handleClick={handleClick} avatar={avatar}/>} />
+        <Route
+          path="/home"
+          element={<Home handleClick={handleClick} avatar={avatar} />}
+        />
+        <Route
+          path="/movies"
+          element={<Movies handleClick={handleClick} avatar={avatar} />}
+        />
         <Route
           path="/tvSeries"
-          element={<TvSeries handleClick={handleClick} avatar={avatar}/>}
+          element={<TvSeries handleClick={handleClick} avatar={avatar} />}
         />
         <Route
           path="/bookmarked"
