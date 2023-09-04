@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { GetMovies, Shearch } from "../..";
+import { GetMovies } from "../..";
 import { MovieItem } from "../Home";
 import { MovieObj, avatar } from "../../types";
+import Search from "../../assets/Shearch";
 
 function Movies(props: {
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
@@ -40,11 +41,23 @@ function Movies(props: {
 
     fetchData();
   }, []);
+  const [movieNames, setMovieNames] = useState<avatar>({
+    avatar: "",
+    name: "",
+    moviestitle: [],
+    token: "",
+  });
+  useEffect(() => {
+    const data = localStorage.getItem("USER");
+    if (data) {
+      setMovieNames(JSON.parse(data));
+    }
+  }, []);
 
   return (
     <div className="flex flex-col items-center xl:items-start xl:ml-[160px] ">
       <div className="flex gap-[4%] w-[90%] items-center mt-[70px] md:mt-[130px] xl:mt-[65px] mb-6">
-        <Shearch />
+        <Search />
         <input
           onInput={input}
           type="text"
@@ -65,6 +78,7 @@ function Movies(props: {
             return (
               <MovieItem
                 movie={movie}
+                movieNames={movieNames}
                 windowWidth={windowWidth}
                 handleClick={props.handleClick}
                 key={movie.title}
@@ -82,6 +96,7 @@ function Movies(props: {
             {movies.map((movie: MovieObj) => {
               return (
                 <MovieItem
+                  movieNames={movieNames}
                   movie={movie}
                   windowWidth={windowWidth}
                   handleClick={props.handleClick}

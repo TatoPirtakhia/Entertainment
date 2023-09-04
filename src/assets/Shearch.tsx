@@ -1,4 +1,4 @@
-function Shearch() {
+function Search() {
   return (
     <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -8,4 +8,4 @@ function Shearch() {
     </svg>
   );
 }
-export default Shearch;
+export default Search;

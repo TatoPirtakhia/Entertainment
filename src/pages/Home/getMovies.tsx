@@ -4,8 +4,9 @@ import { MovieObj, avatar } from "../../types";
 
 function MovieItem(props: {
   movie: MovieObj;
+  movieNames: avatar;
   windowWidth: number;
-  avatar: avatar
+  avatar: avatar;
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -30,7 +31,12 @@ function MovieItem(props: {
     props.handleClick(event);
     setIsClicked(!isClicked);
   };
-  
+  const checkMovie = (name: string) => {
+    const moviestitle = props.movieNames.moviestitle;
+    const response = moviestitle.includes(name);
+    return response;
+  };
+
   return (
     <div
       onMouseEnter={handleMouseEnterMovies}
@@ -45,11 +51,17 @@ function MovieItem(props: {
         onClick={onClick}
         className="absolute cursor-pointer xl:hover:bg-white top-2 left-[124px] md:left-[172px] md:top-4 xl:left-[232px] z-20 w-8 h-8 bg bg-DarkBlue bg-opacity-50 rounded-[50%] flex justify-center items-center "
       >
-        {props.movie.isBookmarked && props.avatar.token ? (
+        {checkMovie(props.movie.title) && props.avatar.token ? (
           <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M10.61 0c.14 0 .273.028.4.083a1.03 1.03 0 0 1 .657.953v11.928a1.03 1.03 0 0 1-.656.953c-.116.05-.25.074-.402.074-.291 0-.543-.099-.756-.296L5.833 9.77l-4.02 3.924c-.218.203-.47.305-.756.305a.995.995 0 0 1-.4-.083A1.03 1.03 0 0 1 0 12.964V1.036A1.03 1.03 0 0 1 .656.083.995.995 0 0 1 1.057 0h9.552Z"
-              stroke={props.windowWidth >= 1440  ?isHovered ? "#000" : "#FFF":'#FFF'}
+              stroke={
+                props.windowWidth >= 1440
+                  ? isHovered
+                    ? "#000"
+                    : "#FFF"
+                  : "#FFF"
+              }
               strokeWidth="1.5"
               fill={!isClicked ? "#FFF" : "none"}
             />
@@ -58,7 +70,13 @@ function MovieItem(props: {
           <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
             <path
               d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z"
-              stroke={props.windowWidth >= 1440  ? isHovered ? "#000" : "#FFF":'#FFF'}
+              stroke={
+                props.windowWidth >= 1440
+                  ? isHovered
+                    ? "#000"
+                    : "#FFF"
+                  : "#FFF"
+              }
               strokeWidth="1.5"
               fill={isClicked ? "#FFF" : "none"}
             />
@@ -76,20 +94,24 @@ function MovieItem(props: {
         alt="image"
         className="rounded-[8px] z-0 "
       />
-      {props.windowWidth >= 1440?<div
-        className={`xl:w-[280px] xl:h-[174px] xl:absolute xl:z-10 flex items-center justify-center ${
-          !isHoveredMovies ? "hidden" : ""
-        } `}
-        style={{
-          background:
-            "linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
-        }}
-      >
-        <div className="w-[117px] h-[48px] bg-white  bg-opacity-50 rounded-[28px] pl-[9px] flex gap-5 items-center ">
-          <Play />
-          <p className="outfit font-medium text-white text-[18px]">Play</p>
+      {props.windowWidth >= 1440 ? (
+        <div
+          className={`xl:w-[280px] xl:h-[174px] xl:absolute xl:z-10 flex items-center justify-center ${
+            !isHoveredMovies ? "hidden" : ""
+          } `}
+          style={{
+            background:
+              "linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+          }}
+        >
+          <div className="w-[117px] h-[48px] bg-white  bg-opacity-50 rounded-[28px] pl-[9px] flex gap-5 items-center ">
+            <Play />
+            <p className="outfit font-medium text-white text-[18px]">Play</p>
+          </div>
         </div>
-      </div>:""}
+      ) : (
+        ""
+      )}
       <div className="w-full h-[50px] flex flex-col gap-[4px] mt-2">
         <ul className="flex gap-4 text-white outfit font-[300] text-[12px] md:text-[14px] opacity-75   ">
           <li>{props.movie.year}</li>

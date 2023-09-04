@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { GetAllMovies, MovieItem, TrendingMovieItem } from ".";
-import { Shearch } from "../..";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { MovieObj, avatar } from "../../types";
-function Home(props:{
-  handleClick: (event: React.MouseEvent<HTMLDivElement>) => void
-  avatar: avatar
+import Search from "../../assets/Shearch";
+function Home(props: {
+  handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  avatar: avatar;
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [data, setData] = useState<MovieObj[]>([]);
   const [originalData, setOriginalData] = useState<MovieObj[]>([]);
   const [count, setCount] = useState<number>(0);
-  const [newData, setNewData] = useState<MovieObj[]>([])
+  const [newData, setNewData] = useState<MovieObj[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
 
   const input = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,11 +54,23 @@ function Home(props:{
     swipeToSlide: true,
     variableWidth: true,
   };
+  const [movieNames, setMovieNames] = useState<avatar>({
+    avatar: "",
+    name: "",
+    moviestitle: [],
+    token: "",
+  });
+  useEffect(() => {
+    const data = localStorage.getItem("USER");
+    if (data) {
+      setMovieNames(JSON.parse(data));
+    }
+  }, []);
 
   return (
     <div className="flex flex-col items-center xl:items-start xl:ml-[160px]">
       <div className="flex gap-[4%] w-[90%] items-center md:mb-4 mt-[70px] md:mt-[130px] xl:mt-[65px]  ">
-        <Shearch />
+        <Search />
         <input
           onInput={input}
           type="text"
@@ -79,6 +91,7 @@ function Home(props:{
             return (
               <MovieItem
                 movie={movie}
+                movieNames={movieNames}
                 windowWidth={windowWidth}
                 handleClick={props.handleClick}
                 key={movie.title}
@@ -99,10 +112,10 @@ function Home(props:{
                   return movie.isTrending ? (
                     <TrendingMovieItem
                       movie={movie}
+                      movieNames={movieNames}
                       windowWidth={windowWidth}
                       handleClick={props.handleClick}
                       key={movie.title}
-                      
                     />
                   ) : (
                     ""
@@ -119,6 +132,7 @@ function Home(props:{
                 !movie.isTrending && (
                   <MovieItem
                     movie={movie}
+                    movieNames={movieNames}
                     handleClick={props.handleClick}
                     windowWidth={windowWidth}
                     key={movie.title}

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { CategoryMovie, CategoryTv, Play } from "../..";
-import { MovieObj } from "../../types";
+import { MovieObj, avatar } from "../../types";
 
 function TrendingMovieItem(props: {
   movie: MovieObj;
+  movieNames: avatar;
   windowWidth: number;
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }) {
@@ -11,6 +12,14 @@ function TrendingMovieItem(props: {
   const [isHoveredMovies, setIsHoveredMovies] = useState(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [token, setToken] = useState<boolean>(false);
+  useEffect(() => {
+    if (props.movieNames.token) {
+      setToken(true);
+    } else {
+      setToken(false);
+    }
+  }, []);
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -30,16 +39,12 @@ function TrendingMovieItem(props: {
     props.handleClick(event);
     setIsClicked(!isClicked);
   };
-  useEffect(() => {
-    const url = window.location.href;
-    const parsedUrl = new URL(url);
-    const Token = parsedUrl.searchParams.get("token");
-    if (Token) {
-      setToken(true);
-    } else {
-      setToken(false);
-    }
-  }, [window.location.href]);
+
+  const checkMovie = (name: string) => {
+    const moviestitle = props.movieNames.moviestitle;
+    const response = moviestitle.includes(name);
+    return response;
+  };
 
   return (
     <div
@@ -57,7 +62,7 @@ function TrendingMovieItem(props: {
         className="absolute top-2 xl:hover:bg-white cursor-pointer left-[200px] md:top-4 md:left-[414px] w-8 
           h-8 bg bg-DarkBlue bg-opacity-50 rounded-[50%] flex justify-center items-center z-20"
       >
-        {props.movie.isBookmarked && token ? (
+        {checkMovie(props.movie.title) && token ? (
           <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M10.61 0c.14 0 .273.028.4.083a1.03 1.03 0 0 1 .657.953v11.928a1.03 1.03 0 0 1-.656.953c-.116.05-.25.074-.402.074-.291 0-.543-.099-.756-.296L5.833 9.77l-4.02 3.924c-.218.203-.47.305-.756.305a.995.995 0 0 1-.4-.083A1.03 1.03 0 0 1 0 12.964V1.036A1.03 1.03 0 0 1 .656.083.995.995 0 0 1 1.057 0h9.552Z"

@@ -14,7 +14,7 @@ function App() {
   const navigate = useNavigate();
   const [movies, setMovies] = useState<MovieObj[]>([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [click, setClik] = useState<boolean>(false);
+  const [click, setClick] = useState<boolean>(false);
   const [example, setExample] = useState<boolean>(false);
 
   const [avatar, setAvatar] = useState<avatar>({
@@ -52,7 +52,7 @@ function App() {
 
   useEffect(() => {
     setPath(window.location.pathname);
-    setClik(false);
+    setClick(false);
   }, [window.location.pathname]);
   const [isHoveredHome, setIsHoveredHome] = useState(false);
   const [isHoveredMovie, setIsHoveredMovie] = useState(false);
@@ -215,14 +215,14 @@ function App() {
               alt=""
               className="w-6 h-6 md:h-[40px] md:w-[40px] rounded-[50%] "
               onClick={() => {
-                setClik(!click);
+                setClick(!click);
               }}
             />
             <button
               onClick={() => {
-                setClik(!click);
+                setClick(!click);
                 setAvatar({ avatar: "", name: "", moviestitle: [], token: "" });
-                navigate("/home");
+                navigate("/login");
               }}
               className={`absolute bg-gray-500 outfit w-[60px] h-6 top-[30px] right-1 md:right-0 md:top-[50px] xl:top-[-40px] xl:left-[-7px] xl:hover:text-Red ${
                 click ? "" : "hidden"

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Shearch } from "../..";
 import { MovieObj, avatar } from "../../types";
 import BookmarkedMovies from "./bookmarkedmovies";
+import Search from "../../assets/Shearch";
 
 function BookMarked(props: {
   avatar: avatar;
@@ -12,7 +12,7 @@ function BookMarked(props: {
 
   const [count, setCount] = useState<number>(0);
   const [newData, setNewData] = useState<MovieObj[]>([]);
-  const [inpitValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>("");
   const [bookMovies, setBookMovies] = useState<MovieObj[]>([]);
 
   const [bookmarkClick, setBookmarkClick] = useState<boolean>(false);
@@ -47,7 +47,7 @@ function BookMarked(props: {
   return (
     <div className="flex flex-col items-center xl:items-start xl:ml-[160px] ">
       <div className="flex gap-[4%] w-[90%] items-center mt-[70px] md:mt-[130px] xl:mt-[65px] mb-6">
-        <Shearch />
+        <Search/>
         <input
           onInput={input}
           type="text"
@@ -55,14 +55,14 @@ function BookMarked(props: {
           placeholder="Search for bookmarked shows"
         />
       </div>
-      {count === 0 && inpitValue !== "" ? (
+      {count === 0 && inputValue !== "" ? (
         <h1 className="outfit mb-4 font-[300] text-white text-[20px] md:text-[32px] w-[95%] z-20">
-          {`Found ${count} results for '${inpitValue}'`}
+          {`Found ${count} results for '${inputValue}'`}
         </h1>
-      ) : count > 0 && inpitValue !== "" ? (
+      ) : count > 0 && inputValue !== "" ? (
         <div className="flex flex-wrap  gap-4 md:gap-8 w-[95%] xl:w-full justify-start ">
           <h1 className="outfit mb-4 font-[300] text-white text-[20px] md:text-[32px] w-[90%] z-20">
-            {`Found ${count} results for '${inpitValue}'`}
+            {`Found ${count} results for '${inputValue}'`}
           </h1>
           {newData.map((movie: MovieObj) => {
             return (

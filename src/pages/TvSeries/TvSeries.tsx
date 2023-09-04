@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Shearch } from "../..";
 import { getTvSeries } from ".";
 import { MovieItem } from "../Home";
 import { avatar } from "../../types";
+import Search from "../../assets/Shearch";
 
-function TvSeries(props:{
-  handleClick: (event: React.MouseEvent<HTMLDivElement>) => void
-  avatar: avatar
+function TvSeries(props: {
+  handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  avatar: avatar;
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -42,11 +42,23 @@ function TvSeries(props:{
 
     fetchData();
   }, []);
+  const [movieNames, setMovieNames] = useState<avatar>({
+    avatar: "",
+    name: "",
+    moviestitle: [],
+    token: "",
+  });
+  useEffect(() => {
+    const data = localStorage.getItem("USER");
+    if (data) {
+      setMovieNames(JSON.parse(data));
+    }
+  }, []);
 
   return (
     <div className="flex flex-col items-center xl:items-start xl:ml-[160px]">
       <div className="flex gap-[4%] w-[90%] items-center mt-[70px] md:mt-[130px] xl:mt-[65px] mb-6">
-        <Shearch />
+        <Search />
         <input
           onInput={input}
           type="text"
@@ -67,6 +79,7 @@ function TvSeries(props:{
             return (
               <MovieItem
                 movie={movie}
+                movieNames={movieNames}
                 windowWidth={windowWidth}
                 key={movie.title}
                 handleClick={props.handleClick}
@@ -85,6 +98,7 @@ function TvSeries(props:{
               return (
                 <MovieItem
                   movie={movie}
+                  movieNames={movieNames}
                   handleClick={props.handleClick}
                   windowWidth={windowWidth}
                   key={movie.title}
