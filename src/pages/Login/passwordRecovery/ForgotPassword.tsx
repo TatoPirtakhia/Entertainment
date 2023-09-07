@@ -32,7 +32,7 @@ function ForgotPassword() {
         <h1 className="outfit font-[300] text-white text-[32px]">
           Forgot Password?
         </h1>
-        <p className="outfit text-center text-[14px] text-[#6C757D] mb-6 border-b-[1px] border-[#5A698F] ">
+        <p className="outfit text-center w-[90%]  text-[14px] text-[#6C757D] mb-6 border-b-[1px] border-[#5A698F] ">
           Enter the email and we'll send an email with instructions to reset
           your password
         </p>
