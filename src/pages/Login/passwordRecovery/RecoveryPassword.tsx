@@ -41,7 +41,7 @@ function RecoveryPassword() {
     <div className="w-full flex flex-col items-center pt-12">
       <Logo />
 
-      <div className="mt-[60px] w-[87%] bg-SemiDarkBlue  flex flex-col items-center pt-5 rounded-[10px] ">
+      <div className="mt-[60px] w-[87%] md:w-[400px] bg-SemiDarkBlue  flex flex-col items-center pt-5 rounded-[10px] ">
         <h1 className="outfit font-[300] text-white text-[32px]">
           Create new password
         </h1>
