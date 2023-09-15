@@ -6,6 +6,7 @@ import ValidationSchema from "./Validation";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { sendRegistrationRequest } from "./index";
+import Google from "../../assets/google";
 function Registration() {
   const [selectedImage, setSelectedImage] = useState<boolean>(true);
   const [errorField, setErrorField] = useState<string>("");
@@ -57,6 +58,9 @@ function Registration() {
       setSelectedImage(true);
     }
   };
+  const google = ()=>{
+    window.open('https://entertainment-api-production.up.railway.app/auth/google','_self')
+  }
   return (
     <div className="w-full flex flex-col items-center pt-12 xl:pt-[80px]">
       <div
@@ -148,7 +152,12 @@ function Registration() {
         </form>
 
         <div className="relative mb-6">
-          <input type="file" ref={imageRef} name="avatar"  className="text-white" />
+          <input
+            type="file"
+            ref={imageRef}
+            name="avatar"
+            className="text-white"
+          />
           {selectedImage ? (
             ""
           ) : (
@@ -164,8 +173,14 @@ function Registration() {
         >
           Create an account
         </button>
+        <div className="bg-white w-[90%] rounded-[6px] mb-6" onClick={google}>
+          <button className="oauthButton">
+            <Google />
+            Continue with Google
+          </button>
+        </div>
         <p className="w-[90%] text-center text-white outfit text-[15px] font-[300] mb-6">
-          Alread have an account?{" "}
+          Already have an account?{" "}
           <span
             className="text-Red ml-2 cursor-pointer  "
             onClick={goToLoginPage}
