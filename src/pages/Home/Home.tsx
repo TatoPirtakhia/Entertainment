@@ -67,6 +67,9 @@ function Home(props: {
     }
   }, []);
 
+
+
+
   return (
     <div className="flex flex-col items-center xl:items-start xl:ml-[160px]">
       <div className="flex gap-[4%] w-[90%] items-center md:mb-4 mt-[70px] md:mt-[130px] xl:mt-[65px]  ">

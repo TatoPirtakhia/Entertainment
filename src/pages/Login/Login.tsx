@@ -7,8 +7,9 @@ import { LoginWithEmail, isEmail } from "./LoginNameOrEmail/LoginWithEmail";
 import LoginWithName from "./LoginNameOrEmail/LoginWithName";
 import { useState } from "react";
 import { Logo } from "../../assets";
+import Google from "../../assets/google";
 function Login(props: {
-  avatar: avatar
+  avatar: avatar;
   setAvatar: React.Dispatch<React.SetStateAction<avatar>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -28,25 +29,41 @@ function Login(props: {
   const onSubmit: SubmitHandler<login> = async (data) => {
     if (isEmail(data.nameOrEmail)) {
       try {
-        const user = await LoginWithEmail({email:data.nameOrEmail,password:data.password});
-        navigate('/home');
+        const user = await LoginWithEmail({
+          email: data.nameOrEmail,
+          password: data.password,
+        });
+        navigate("/home");
         const img = user.user.avatar;
-        const name = user.user.name
-        const movies = user.user.movititle
-        const token =  user.token
-        props.setAvatar({ avatar: img , name, moviestitle: movies ,token:token});
+        const name = user.user.name;
+        const movies = user.user.movititle;
+        const token = user.token;
+        props.setAvatar({
+          avatar: img,
+          name,
+          moviestitle: movies,
+          token: token,
+        });
       } catch (error) {
         setErrorMessage((error as { message: string }).message);
       }
     } else {
       try {
-        const user = await LoginWithName({name:data.nameOrEmail,password:data.password});
-        navigate('/home');
+        const user = await LoginWithName({
+          name: data.nameOrEmail,
+          password: data.password,
+        });
+        navigate("/home");
         const img = user.user.avatar;
-        const name = user.user.name
-        const movies = user.user.movititle
-        const token =  user.token
-        props.setAvatar({ avatar: img , name, moviestitle: movies ,token:token});
+        const name = user.user.name;
+        const movies = user.user.movititle;
+        const token = user.token;
+        props.setAvatar({
+          avatar: img,
+          name,
+          moviestitle: movies,
+          token: token,
+        });
       } catch (error) {
         setErrorMessage((error as { message: string }).message);
       }
@@ -117,9 +134,20 @@ function Login(props: {
         >
           Login to your account
         </button>
+        <div className="bg-white w-[90%] rounded-[6px] mb-6">
+          <a href="http://localhost:3005/auth/google" >
+            <button className="oauthButton">
+              <Google />
+              Continue with Google
+            </button>
+          </a>
+        </div>
         <p className="w-[90%] text-center text-white outfit text-[15px] font-[300] mb-6">
           Don't have an account?{" "}
-          <span className="text-Red ml-2  cursor-pointer" onClick={goToRegistration}>
+          <span
+            className="text-Red ml-2  cursor-pointer"
+            onClick={goToRegistration}
+          >
             Sign Up
           </span>
         </p>
