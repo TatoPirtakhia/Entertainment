@@ -5,9 +5,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { MovieObj, avatar } from "../../types";
 import Search from "../../assets/Shearch";
+import loginWithGoogle from "../Login/LoginNameOrEmail/loginWIthGoogle";
 function Home(props: {
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
   avatar: avatar;
+  setAvatar: React.Dispatch<React.SetStateAction<avatar>>
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [data, setData] = useState<MovieObj[]>([]);
@@ -60,15 +62,37 @@ function Home(props: {
     moviestitle: [],
     token: "",
   });
+
+  useEffect(() => {
+    const getUser = async (name: string) => {
+      console.log('hello')
+      const user = await loginWithGoogle({ name: name });
+        const img = user.user.avatar;
+        const Username = user.user.name;
+        const movies = user.user.movititle;
+        const token = user.token;
+        props.setAvatar({
+          avatar: img,
+          name:Username,
+          moviestitle: movies,
+          token: token,
+        });
+    };
+    const url = window.location.href;
+    const urlObject = new URL(url);
+    const name = urlObject.searchParams.get("name");
+    if (name) {
+      console.log('i am in')
+      name ? getUser(name):console.log('nope');
+    }
+  }, []);
+
   useEffect(() => {
     const data = localStorage.getItem("USER");
     if (data) {
       setMovieNames(JSON.parse(data));
     }
   }, []);
-
-
-
 
   return (
     <div className="flex flex-col items-center xl:items-start xl:ml-[160px]">

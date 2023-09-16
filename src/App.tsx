@@ -247,7 +247,7 @@ function App() {
         <Route path="/RecoveryPassword" element={<RecoveryPassword />} />
         <Route
           path="/home"
-          element={<Home handleClick={handleClick} avatar={avatar} />}
+          element={<Home handleClick={handleClick} avatar={avatar} setAvatar={setAvatar} />}
         />
         <Route
           path="/movies"

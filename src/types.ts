@@ -71,3 +71,6 @@ export type loginEmail = {
   email: string
   password: string
 }
+export type loginGoogle = {
+  name: string 
+}
