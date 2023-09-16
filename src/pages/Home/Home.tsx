@@ -65,7 +65,6 @@ function Home(props: {
 
   useEffect(() => {
     const getUser = async (name: string) => {
-      console.log('hello')
       const user = await loginWithGoogle({ name: name });
         const img = user.user.avatar;
         const Username = user.user.name;
@@ -82,7 +81,6 @@ function Home(props: {
     const urlObject = new URL(url);
     const name = urlObject.searchParams.get("name");
     if (name) {
-      console.log('i am in')
       name ? getUser(name):console.log('nope');
     }
   }, []);
