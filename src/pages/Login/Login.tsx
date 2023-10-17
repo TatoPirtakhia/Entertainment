@@ -135,7 +135,7 @@ function Login(props: {
           Login to your account
         </button>
         <div className="bg-white w-[90%] rounded-[6px] mb-6">
-          <a href="https://entertainment-api-production.up.railway.app/auth/google" >
+          <a href="https://entertainment-ld1a.onrender.com/auth/google" >
             <button className="oauthButton">
               <Google />
               Continue with Google
