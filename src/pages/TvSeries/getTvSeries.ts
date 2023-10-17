@@ -2,7 +2,7 @@ import axios from "axios";
 
 const getTvSeries = async () => {
   try {
-    const response = await axios.get("https://entertainment-api-production.up.railway.app/api/TvSeries");
+    const response = await axios.get("https://entertainment-ld1a.onrender.com/api/TvSeries");
     return response.data
   
   } catch (error) {
