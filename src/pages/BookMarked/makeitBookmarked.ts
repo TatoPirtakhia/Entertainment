@@ -5,7 +5,7 @@ const setBookmark = async (data: BokkmarkSend) => {
   
   try {
     const response = await axios.post(
-      "https://entertainment-api-production.up.railway.app/api/BookMark",
+      "https://entertainment-ld1a.onrender.com/api/BookMark",
       {
         title: data.clickedSvg,
         name: data.name,
