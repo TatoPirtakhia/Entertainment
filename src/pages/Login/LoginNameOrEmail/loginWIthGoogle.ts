@@ -4,7 +4,7 @@ import { loginGoogle } from "../../../types";
 const loginWithGoogle = async (data: loginGoogle) => {
   try {
     const response = await axios.post(
-      "https://entertainment-api-production.up.railway.app/api/loginWithGoogle",
+      "https://entertainment-ld1a.onrender.com/api/loginWithGoogle",
       {
         name: data.name,
       }
